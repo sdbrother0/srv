@@ -36,6 +36,7 @@ import static com.example.demo.mapper.MapperService.test4Mapper;
 @RestController
 @RequiredArgsConstructor
 public class Test4Controller {
+
     private final Test1Repository test1Repository;
     private final Test4Repository test4Repository;
     private final ObjectMapper objectMapper;

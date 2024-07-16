@@ -26,6 +26,7 @@ import static com.example.demo.mapper.MapperService.test1Mapper;
 @RestController
 @RequiredArgsConstructor
 public class Test1Controller {
+
     private final Test1Repository test1Repository;
     private final ObjectMapper objectMapper;
 
