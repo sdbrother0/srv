@@ -67,7 +67,11 @@ public class Test1Controller {
                             "type": {
                                 "name": "text"
                             },
-                            "editable": true
+                            "editable": true,
+                            "validation": {
+                                "required": true,
+                                "message": "Input please!!!"
+                            }
                         },
                         {
                             "name": "test2",
