@@ -91,9 +91,15 @@ public class Test3Controller {
         return test3Repository.findAll(simpleLikeSpecification, pageable);
     }
 
+    @Transactional
     @DeleteMapping("/test3")
-    void delete3(@RequestParam UUID id) {
+    public Test3Entity delete(@RequestParam UUID id) {
+        Test3Entity test3Entity = test3Repository.findById(id).orElseThrow();
         test3Repository.deleteById(id);
+        Test1Entity test1Entity = test1Repository.findById(test3Entity.getTest1().getId()).orElseThrow();
+        entityManager.flush();
+        entityManager.refresh(test1Entity);
+        return test3Entity;
     }
 
     @PostMapping("/test3")

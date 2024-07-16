@@ -35,7 +35,7 @@ public class Test2Controller {
     private final ObjectMapper objectMapper;
 
     @GetMapping("/meta/test2")
-    public Object getMetaData2() throws JsonProcessingException {
+    public Object getMetaData() throws JsonProcessingException {
         String meta = """
                 {
                     "url" : "http://localhost:8090/test2",
@@ -79,12 +79,14 @@ public class Test2Controller {
     }
 
     @DeleteMapping("/test2")
-    void delete2(@RequestParam UUID id) {
+    public Test2Entity delete(@RequestParam UUID id) {
+        Test2Entity test2Entity = test2Repository.findById(id).orElseThrow();
         test2Repository.deleteById(id);
+        return test2Entity;
     }
 
     @PostMapping("/test2")
-    public Test2Entity save2(@RequestBody Table2Dto table2Dto) {
+    public Test2Entity save(@RequestBody Table2Dto table2Dto) {
         Test2Entity test2Entity = test2Mapper.map(table2Dto);
         return test2Repository.saveAndFlush(test2Entity);
     }

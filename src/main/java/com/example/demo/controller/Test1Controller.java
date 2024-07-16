@@ -141,8 +141,10 @@ public class Test1Controller {
     }
 
     @DeleteMapping("/test1")
-    void delete(@RequestParam UUID id) {
+    public Test1Entity delete(@RequestParam UUID id) {
+        Test1Entity test1Entity = test1Repository.findById(id).orElseThrow();
         test1Repository.deleteById(id);
+        return test1Entity;
     }
 
     @PostMapping("/test1")
