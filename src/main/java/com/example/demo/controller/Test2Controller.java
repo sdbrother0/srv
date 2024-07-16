@@ -67,7 +67,7 @@ public class Test2Controller {
     }
 
     @GetMapping("/test2")
-    public Page<Test2Entity> findAllTest2(Pageable pageable,
+    public Page<Test2Entity> findAll(Pageable pageable,
                                           @RequestParam(name = "search", required = false) List<String> search,
                                           @RequestParam(name = "keyValue", required = false) String keyValue) {
         Specification<Test2Entity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(),

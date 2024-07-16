@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface Test3Mapper {
-    Test3Entity map(Table3Dto table2Dto);
+    Test3Entity map(Table3Dto table3Dto);
     Table3Dto map(Test3Entity test3Entity);
 
 }

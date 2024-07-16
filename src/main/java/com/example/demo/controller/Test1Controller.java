@@ -82,8 +82,16 @@ public class Test1Controller {
                             "editable": true
                         },
                         {
-                            "name": "myCount",
-                            "label": "Количество",
+                            "name": "myCount3",
+                            "label": "Количество тест 3",
+                            "type": {
+                                "name": "text"
+                            },
+                            "editable": false
+                        },
+                        {
+                            "name": "myCount4",
+                            "label": "Количество тест 4",
                             "type": {
                                 "name": "text"
                             },
@@ -94,6 +102,10 @@ public class Test1Controller {
                           {
                             "label": "Test 3 table",
                             "metaUrl" : "http://localhost:8090/meta/test3"
+                          },
+                          {
+                            "label": "Test 4 table",
+                            "metaUrl" : "http://localhost:8090/meta/test4"
                           }
                     ]
                 }
