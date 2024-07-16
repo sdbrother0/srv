@@ -29,11 +29,13 @@ import static com.example.demo.mapper.MapperService.test2Mapper;
 @RestController
 @RequiredArgsConstructor
 public class Test2Controller {
-    private final Test2Repository test2Repository;
 
+    private final Test2Repository test2Repository;
     private final ObjectMapper objectMapper;
 
-    @GetMapping("/meta/test2")
+    private static final String DATA_URL = "/test2";
+
+    @GetMapping("/meta" + DATA_URL)
     public Object getMetaData() throws JsonProcessingException {
         String meta = """
                 {
@@ -66,7 +68,7 @@ public class Test2Controller {
         return objectMapper.readValue(meta, MetaData.class);
     }
 
-    @GetMapping("/test2")
+    @GetMapping(DATA_URL)
     public Page<Test2Entity> findAll(Pageable pageable,
                                           @RequestParam(name = "search", required = false) List<String> search,
                                           @RequestParam(name = "keyValue", required = false) String keyValue) {
@@ -77,14 +79,14 @@ public class Test2Controller {
         return test2Repository.findAll(simpleLikeSpecification, pageRequest);
     }
 
-    @DeleteMapping("/test2")
+    @DeleteMapping(DATA_URL)
     public Test2Entity delete(@RequestParam UUID id) {
         Test2Entity test2Entity = test2Repository.findById(id).orElseThrow();
         test2Repository.deleteById(id);
         return test2Entity;
     }
 
-    @PostMapping("/test2")
+    @PostMapping(DATA_URL)
     public Test2Entity save(@RequestBody Table2Dto table2Dto) {
         Test2Entity test2Entity = test2Mapper.map(table2Dto);
         return test2Repository.saveAndFlush(test2Entity);

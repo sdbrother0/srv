@@ -38,12 +38,12 @@ import static com.example.demo.mapper.MapperService.test4Mapper;
 public class Test4Controller {
     private final Test1Repository test1Repository;
     private final Test4Repository test4Repository;
-
     private final ObjectMapper objectMapper;
-
     private final EntityManager entityManager;
 
-    @GetMapping("/meta/test4")
+    private static final String DATA_URL = "/test4";
+
+    @GetMapping("/meta" + DATA_URL)
     public Object getMetaData3() throws JsonProcessingException {
         String meta = """
                 {
@@ -76,7 +76,7 @@ public class Test4Controller {
         return objectMapper.readValue(meta, MetaData.class);
     }
 
-    @GetMapping("/test4")
+    @GetMapping(DATA_URL)
     public Page<Test4Entity> findAll(Pageable pageable,
                                           @RequestParam(value = "masterId", required = false) UUID masterId,
                                           @RequestParam(name = "search", required = false) List<String> search) {
@@ -91,7 +91,7 @@ public class Test4Controller {
     }
 
     @Transactional
-    @DeleteMapping("/test4")
+    @DeleteMapping(DATA_URL)
     public Test4Entity delete(@RequestParam UUID id) {
         Test4Entity test4Entity = test4Repository.findById(id).orElseThrow();
         test4Repository.deleteById(id);
@@ -101,7 +101,7 @@ public class Test4Controller {
         return test4Entity;
     }
 
-    @PostMapping("/test4")
+    @PostMapping(DATA_URL)
     @Transactional
     public Test4Entity save(@RequestBody Table4Dto table3Dto) {
 

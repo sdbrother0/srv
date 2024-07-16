@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dto.meta.MetaData;
 import com.example.demo.entity.Test1Entity;
 import com.example.demo.repository.Test1Repository;
-import com.example.demo.repository.Test2Repository;
 import com.example.demo.dto.Table1Dto;
 import com.example.demo.specification.SimpleLikeSpecification;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,11 +27,11 @@ import static com.example.demo.mapper.MapperService.test1Mapper;
 @RequiredArgsConstructor
 public class Test1Controller {
     private final Test1Repository test1Repository;
-    private final Test2Repository test2Repository;
-
     private final ObjectMapper objectMapper;
 
-    @GetMapping("/meta/test1")
+    private static final String DATA_URL = "/test1";
+
+    @GetMapping("/meta" + DATA_URL)
     public Object getMetaData() throws JsonProcessingException {
 
         return objectMapper.readValue( """
@@ -110,56 +109,23 @@ public class Test1Controller {
                     ]
                 }
             """, MetaData.class);
-
-        /*
-
-        return MetaData.builder()
-            .url("http://localhost:8090/test1")
-            .keyFieldName("id")
-            .showSelect(true)
-            .showLoader(true)
-            .showAction(true)
-            .fields(List.of(
-                Field.builder().name("id").label("ИД (UUID)").hidden(true)
-                    .type(FieldType.builder().name("text").build()).build(),
-                Field.builder().name("created").label("Дата").hidden(false)
-                    .type(FieldType.builder().name("date").format("yyyy-MM-dd HH:mm:ss").build()).build(),
-                Field.builder().name("test2").label("Вал").hidden(false)
-                    .type(FieldType.builder().name("lookup")
-                        .metaUrl("http://localhost:8090/meta/test2")
-                        .foreignKey("test2_id")
-                        .keyFieldName("id")
-                        .valFieldName("val")
-                    .build()).build(),
-                Field.builder().name("test").label("Тест").hidden(false)
-                    .type(FieldType.builder().name("text").build()).build())
-            )
-            .details(List.of(Detail
-                .builder()
-                    .label("Test 3 table")
-                    .metaUrl("http://localhost:8090/meta/test3")
-                    .masterObjectName("test1")
-                    .masterFieldKey("id")
-                .build())).build();
-
-         */
     }
 
-    @GetMapping("/test1")
+    @GetMapping(DATA_URL)
     public Page<Test1Entity> findAll(Pageable pageable,
                                      @RequestParam(name = "search", required = false) List<String> search) {
         Specification<Test1Entity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null);
         return test1Repository.findAll(simpleLikeSpecification, pageable);
     }
 
-    @DeleteMapping("/test1")
+    @DeleteMapping(DATA_URL)
     public Test1Entity delete(@RequestParam UUID id) {
         Test1Entity test1Entity = test1Repository.findById(id).orElseThrow();
         test1Repository.deleteById(id);
         return test1Entity;
     }
 
-    @PostMapping("/test1")
+    @PostMapping(DATA_URL)
     public Test1Entity save(@RequestBody Table1Dto table1Dto) {
         Test1Entity test1Entity = test1Mapper.map(table1Dto);
         return test1Repository.saveAndFlush(test1Entity);
