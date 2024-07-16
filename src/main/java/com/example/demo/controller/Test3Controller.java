@@ -4,7 +4,6 @@ import com.example.demo.dto.meta.MetaData;
 import com.example.demo.entity.Test1Entity;
 import com.example.demo.repository.Test1Repository;
 import com.example.demo.entity.Test3Entity;
-import com.example.demo.repository.Test2Repository;
 import com.example.demo.repository.Test3Repository;
 import com.example.demo.dto.Table3Dto;
 import com.example.demo.specification.SimpleLikeSpecification;
