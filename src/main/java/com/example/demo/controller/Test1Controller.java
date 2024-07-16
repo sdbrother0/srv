@@ -89,15 +89,15 @@ public class Test1Controller {
                             "name": "myCount3",
                             "label": "Количество тест 3",
                             "type": {
-                                "name": "text"
+                                "name": "number"
                             },
                             "editable": false
                         },
                         {
-                            "name": "myCount4",
-                            "label": "Количество тест 4",
+                            "name": "mySum4",
+                            "label": "Сумма тест 4",
                             "type": {
-                                "name": "text"
+                                "name": "number"
                             },
                             "editable": false
                         }

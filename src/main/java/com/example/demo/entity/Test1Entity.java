@@ -1,9 +1,7 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,6 +15,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -51,7 +50,7 @@ public class Test1Entity {
     @Formula(value="(select count(*) FROM test3 WHERE test3.test1_id = id)")
     private Long myCount3;
 
-    @Formula(value="(select count(*) FROM test4 WHERE test4.test1_id = id)")
-    private Long myCount4;
+    @Formula(value="(select sum(test4.amount) FROM test4 WHERE test4.test1_id = id)")
+    private BigDecimal mySum4;
 
 }

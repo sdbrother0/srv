@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
@@ -33,6 +34,6 @@ public class Test4Entity {
     @JoinColumn(name = "test1_id", nullable = false)
     private Test1Entity test1;
 
-    @Column(name = "amount")
-    private Double amount;
+    @Column(name = "amount", precision=18, scale=2)
+    private BigDecimal amount;
 }
