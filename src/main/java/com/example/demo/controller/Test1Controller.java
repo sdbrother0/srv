@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.SaveDto;
-import com.example.demo.dto.Table2Dto;
 import com.example.demo.dto.meta.MetaData;
 import com.example.demo.entity.Test1Entity;
 import com.example.demo.repository.Test1Repository;
