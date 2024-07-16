@@ -46,11 +46,9 @@ public class Test1Entity {
     private LocalDateTime created;
 
     @Formula(value="(select count(*) FROM test3 WHERE test3.test1_id = id)")
-    //@Basic(fetch= FetchType.EAGER)
     private Long myCount3;
 
     @Formula(value="(select count(*) FROM test4 WHERE test4.test1_id = id)")
-    //@Basic(fetch= FetchType.EAGER)
     private Long myCount4;
 
 }

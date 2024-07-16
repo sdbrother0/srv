@@ -44,12 +44,9 @@ public class SimpleLikeSpecification<T> implements Specification<T> {
         }
 
         List<Order> orderList = new ArrayList<>();
-        //for select by id
+        //for select by id in lookup component table
         if (Objects.nonNull(keyValue)) {
-            Order orderByIdEqual = criteriaBuilder.asc(criteriaBuilder.selectCase()
-                .when(criteriaBuilder.equal(root.get(keyValue.getFirst()).as(String.class), keyValue.getSecond()), criteriaBuilder.literal(0))
-                .otherwise(criteriaBuilder.literal(1))
-            );
+            Order orderByIdEqual = criteriaBuilder.asc(criteriaBuilder.selectCase().when(criteriaBuilder.equal(root.get(keyValue.getFirst()).as(String.class), keyValue.getSecond()), criteriaBuilder.literal(0)).otherwise(criteriaBuilder.literal(1)));
             orderList.add(orderByIdEqual);
         }
 

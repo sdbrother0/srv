@@ -10,5 +10,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.UUID;
 
 public interface Test4Repository extends JpaRepository<Test4Entity, UUID>, JpaSpecificationExecutor<Test4Entity> {
+    @Override
     Page<Test4Entity> findAll(Specification<Test4Entity> spec, Pageable pageable);
 }
