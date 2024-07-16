@@ -79,8 +79,8 @@ public class Test3Controller {
 
     @GetMapping(DATA_URL)
     public Page<Test3Entity> findAll(Pageable pageable,
-                                          @RequestParam(value = "masterId", required = false) UUID masterId,
-                                          @RequestParam(name = "search", required = false) List<String> search) {
+                                     @RequestParam(value = "masterId", required = false) UUID masterId,
+                                     @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(masterId)) {
             return new PageImpl<>(Collections.emptyList());
         }

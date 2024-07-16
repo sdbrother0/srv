@@ -70,8 +70,8 @@ public class Test2Controller {
 
     @GetMapping(DATA_URL)
     public Page<Test2Entity> findAll(Pageable pageable,
-                                          @RequestParam(name = "search", required = false) List<String> search,
-                                          @RequestParam(name = "keyValue", required = false) String keyValue) {
+                                     @RequestParam(name = "search", required = false) List<String> search,
+                                     @RequestParam(name = "keyValue", required = false) String keyValue) {
         Specification<Test2Entity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(),
             Objects.isNull(keyValue) ? null : Pair.of("id", keyValue));
 
