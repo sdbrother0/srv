@@ -59,7 +59,7 @@ public class Test4Controller {
                             "name": "id",
                             "label": "ИД (UUID)",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "hidden": false
                         },
@@ -67,7 +67,7 @@ public class Test4Controller {
                             "name": "val",
                             "label": "Вал 4",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "editable": true
                         },

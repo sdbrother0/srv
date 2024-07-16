@@ -48,7 +48,7 @@ public class Test1Controller {
                             "name": "id",
                             "label": "ИД (UUID)",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "hidden": true
                         },
@@ -65,7 +65,7 @@ public class Test1Controller {
                             "name": "test",
                             "label": "Тест",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "editable": true,
                             "validation": {

@@ -59,7 +59,7 @@ public class Test3Controller {
                             "name": "id",
                             "label": "ИД (UUID)",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "hidden": false
                         },

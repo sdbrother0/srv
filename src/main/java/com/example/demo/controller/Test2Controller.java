@@ -50,7 +50,7 @@ public class Test2Controller {
                             "name": "id",
                             "label": "ИД (UUID)",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "hidden": false
                         },
@@ -58,7 +58,7 @@ public class Test2Controller {
                             "name": "val",
                             "label": "Вал",
                             "type": {
-                                "name": "text"
+                                "name": "string"
                             },
                             "editable": true
                         }
