@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FieldType {
-    private String name;
+    private FieldTypeName name;
 
     //lookup
     private String metaUrl;

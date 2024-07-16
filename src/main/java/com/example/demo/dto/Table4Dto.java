@@ -9,4 +9,5 @@ public class Table4Dto {
     private UUID id;
     private String val;
     private Table1Dto test1;
+    private Double amount;
 }

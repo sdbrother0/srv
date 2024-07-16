@@ -30,10 +30,13 @@ public class Test1Entity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @UuidGenerator
     private UUID id;
+
     @Column(name = "test")
     private String test;
+
     @Column(name = "field1")
     private Integer field1;
+
     @Column(name = "field2")
     private String field2;
 

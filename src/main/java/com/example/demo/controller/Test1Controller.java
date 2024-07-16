@@ -48,7 +48,7 @@ public class Test1Controller {
                             "name": "id",
                             "label": "ИД (UUID)",
                             "type": {
-                                "name": "test"
+                                "name": "text"
                             },
                             "hidden": true
                         },

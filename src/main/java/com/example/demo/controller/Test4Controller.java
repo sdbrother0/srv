@@ -70,6 +70,14 @@ public class Test4Controller {
                                 "name": "text"
                             },
                             "editable": true
+                        },
+                        {
+                            "name": "amount",
+                            "label": "Цена",
+                            "type": {
+                                "name": "number"
+                            },
+                            "editable": true
                         }
                     ]
                 }

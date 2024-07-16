@@ -20,13 +20,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "test4")
 public class Test4Entity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @UuidGenerator
     private UUID id;
+
     @Column(name = "val")
     private String val;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "test1_id", nullable = false)
-    Test1Entity test1;
+    private Test1Entity test1;
+
+    @Column(name = "amount")
+    private Double amount;
 }

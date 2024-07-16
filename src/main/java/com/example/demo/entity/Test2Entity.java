@@ -17,10 +17,12 @@ import java.util.UUID;
 @Entity
 @Table(name = "test2")
 public class Test2Entity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @UuidGenerator
     private UUID id;
+
     @Column(name = "val")
     private String val;
 
