@@ -8,6 +8,10 @@ import com.example.demo.specification.SimpleLikeSpecification;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +30,7 @@ import static com.example.demo.mapper.MapperService.test1Mapper;
 
 @RestController
 @RequiredArgsConstructor
+@Log4j2
 public class Test1Controller {
 
     private final Test1Repository test1Repository;
@@ -134,6 +140,17 @@ public class Test1Controller {
     public Test1Entity save(@RequestBody Table1Dto table1Dto) {
         Test1Entity test1Entity = test1Mapper.map(table1Dto);
         return test1Repository.saveAndFlush(test1Entity);
+    }
+
+    @GetMapping("/report")
+    public void report() {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/reports/employeeReport.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+            log.info("Report compile ok");
+        } catch (JRException e) {
+            log.error("Report error", e);
+        }
     }
 
 
