@@ -50,7 +50,7 @@ public class Test1Controller {
                             "type": {
                                 "name": "test"
                             },
-                            "hidden": false
+                            "hidden": true
                         },
                         {
                             "name": "created",

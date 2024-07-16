@@ -64,7 +64,7 @@ public class Test4Controller {
                         },
                         {
                             "name": "val",
-                            "label": "Вал",
+                            "label": "Вал 4",
                             "type": {
                                 "name": "text"
                             },
