@@ -35,11 +35,13 @@ public class SimpleLikeSpecification<T> implements Specification<T> {
         if (Objects.nonNull(this.search)) {
             for (String searchFieldValue : this.search) {
                 String[] fieldValue = searchFieldValue.split("=");
-                String field = fieldValue[0];
-                String value = fieldValue[1];
-                Path<T> fieldPath = toPatch(field, root);
-                Predicate predicate = criteriaBuilder.like(criteriaBuilder.upper(fieldPath.as(String.class)), "%" + value.toUpperCase() + "%");
-                predicateList.add(predicate);
+                if (fieldValue.length == 2) {
+                    String field = fieldValue[0];
+                    String value = fieldValue[1];
+                    Path<T> fieldPath = toPatch(field, root);
+                    Predicate predicate = criteriaBuilder.like(criteriaBuilder.upper(fieldPath.as(String.class)), "%" + value.toUpperCase() + "%");
+                    predicateList.add(predicate);
+                }
             }
         }
 
