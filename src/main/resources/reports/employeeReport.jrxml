@@ -1,13 +1,18 @@
-<?xml version="1.0"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="HelloReportWorld">
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="Blank_A4" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ccd9eef8-5f15-4f18-8994-5df9b56ca71f">
+    <query language="sql"><![CDATA[]]></query>
+    <background splitType="Stretch"/>
+    <title height="79" splitType="Stretch">
+        <element kind="textField" uuid="b376825b-fa29-4793-916d-fdaf405f01bb" x="170" y="20" width="231" height="21">
+            <expression><![CDATA["Text Field"]]></expression>
+        </element>
+    </title>
+    <pageHeader height="35" splitType="Stretch"/>
+    <columnHeader height="61" splitType="Stretch"/>
     <detail>
-        <band height="200">
-            <staticText>
-                <reportElement x="0" y="0" width="500" height="20"/>
-                <text><![CDATA[Hello Report World!]]></text>
-            </staticText>
-        </band>
+        <band height="125" splitType="Stretch"/>
     </detail>
+    <columnFooter height="45" splitType="Stretch"/>
+    <pageFooter height="54" splitType="Stretch"/>
+    <summary height="42" splitType="Stretch"/>
 </jasperReport>

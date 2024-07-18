@@ -9,12 +9,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +46,7 @@ public class Test1Controller {
     private final ObjectMapper objectMapper;
 
     private static final String DATA_URL = "/test1";
+    private final DataSource dataSource;
 
     @GetMapping("/meta" + DATA_URL)
     public Object getMetaData() throws JsonProcessingException {
@@ -56,7 +66,7 @@ public class Test1Controller {
                             "type": {
                                 "name": "string"
                             },
-                            "hidden": true
+                            "hidden": false
                         },
                         {
                             "name": "created",
@@ -143,14 +153,15 @@ public class Test1Controller {
     }
 
     @GetMapping("/report")
-    public void report() {
-        try {
-            InputStream inputStream = getClass().getResourceAsStream("/reports/employeeReport.jrxml");
-            JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-            log.info("Report compile ok");
-        } catch (JRException e) {
-            log.error("Report error", e);
-        }
+    public ResponseEntity<byte[]> report() throws JRException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
+        InputStream inputStream = getClass().getResourceAsStream("/reports/employeeReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), new JREmptyDataSource());
+        byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint);
+        return ResponseEntity.ok().headers(headers).body(pdf);
     }
 
 
