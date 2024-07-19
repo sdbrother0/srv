@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -153,15 +154,20 @@ public class Test1Controller {
     }
 
     @GetMapping("/report")
-    public ResponseEntity<byte[]> report(@RequestParam(name = "id", required = false) String id) throws JRException, SQLException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType("application/pdf"));
-        headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
-        Map<String, Object> params = new HashMap<>();
-        params.put("TEST1_ID", id);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reportService.getReport01(), params, dataSource.getConnection());
-        byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint);
-        return ResponseEntity.ok().headers(headers).body(pdf);
+    public ResponseEntity<byte[]> report(@RequestParam(name = "id", required = false) String id) {
+        try (Connection con = dataSource.getConnection()) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType("application/pdf"));
+            headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
+            Map<String, Object> params = new HashMap<>();
+            params.put("TEST1_ID", id);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportService.getReport01(), params, con);
+            byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint);
+            return ResponseEntity.ok().headers(headers).body(pdf);
+        } catch (Exception e) {
+            log.error("Error report", e);
+            return null;
+        }
     }
 
 
