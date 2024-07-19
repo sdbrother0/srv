@@ -4,17 +4,16 @@ import com.example.demo.dto.meta.MetaData;
 import com.example.demo.entity.Test1Entity;
 import com.example.demo.repository.Test1Repository;
 import com.example.demo.dto.Table1Dto;
+import com.example.demo.service.ReportService;
 import com.example.demo.specification.SimpleLikeSpecification;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +43,7 @@ public class Test1Controller {
 
     private final Test1Repository test1Repository;
     private final ObjectMapper objectMapper;
+    private final ReportService reportService;
 
     private static final String DATA_URL = "/test1";
     private final DataSource dataSource;
@@ -158,14 +157,14 @@ public class Test1Controller {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
         headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
-        InputStream inputStream = getClass().getResourceAsStream("/reports/rep01.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
         Map<String, Object> params = new HashMap<>();
         params.put("TEST1_ID", id);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());
+        JasperPrint jasperPrint = JasperFillManager.fillReport(reportService.getReport01(), params, dataSource.getConnection());
         byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint);
         return ResponseEntity.ok().headers(headers).body(pdf);
     }
+
+
 
 
 }
