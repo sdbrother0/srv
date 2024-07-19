@@ -19,4 +19,5 @@ public class MetaData implements Serializable {
     private Boolean showLoader;
     private List<Field> fields;
     private List<Detail> details;
+    private List<Report> reports;
 }
