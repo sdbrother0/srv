@@ -9,7 +9,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -31,8 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static com.example.demo.mapper.MapperService.test1Mapper;
@@ -153,13 +154,15 @@ public class Test1Controller {
     }
 
     @GetMapping("/report")
-    public ResponseEntity<byte[]> report() throws JRException {
+    public ResponseEntity<byte[]> report(@RequestParam(name = "id", required = false) String id) throws JRException, SQLException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
         headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
-        InputStream inputStream = getClass().getResourceAsStream("/reports/employeeReport.jrxml");
+        InputStream inputStream = getClass().getResourceAsStream("/reports/rep01.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(inputStream);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), new JREmptyDataSource());
+        Map<String, Object> params = new HashMap<>();
+        params.put("TEST1_ID", id);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, dataSource.getConnection());
         byte[] pdf = JasperExportManager.exportReportToPdf(jasperPrint);
         return ResponseEntity.ok().headers(headers).body(pdf);
     }

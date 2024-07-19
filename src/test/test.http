@@ -28,4 +28,4 @@ sec-ch-ua-mobile: ?0
 sec-ch-ua-platform: "macOS"
 
 ###
-GET http://localhost:8090/report
+GET http://localhost:8090/report?id=192dbf64-8af1-4ec3-80de-8388ed0a2512

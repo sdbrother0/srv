@@ -1,0 +1,73 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="Rep01" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cca5dd31-81d0-4c5a-bad1-6068975bc266">
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="Test"/>
+    <parameter name="TEST1_ID" class="java.lang.String"/>
+    <query language="SQL"><![CDATA[select test1.id, test1.created, test4.val, test4.amount from test1 join test4 on test1.id = test4.test1_id where test1.id::text = $P{TEST1_ID}]]></query>
+    <field name="id" class="java.util.UUID">
+        <property name="com.jaspersoft.studio.field.name" value="id"/>
+        <property name="com.jaspersoft.studio.field.label" value="id"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="test1"/>
+    </field>
+    <field name="created" class="java.sql.Timestamp">
+        <property name="com.jaspersoft.studio.field.name" value="created"/>
+        <property name="com.jaspersoft.studio.field.label" value="created"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="test1"/>
+    </field>
+    <field name="val" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="val"/>
+        <property name="com.jaspersoft.studio.field.label" value="val"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="test4"/>
+    </field>
+    <field name="amount" class="java.math.BigDecimal">
+        <property name="com.jaspersoft.studio.field.name" value="amount"/>
+        <property name="com.jaspersoft.studio.field.label" value="amount"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="test4"/>
+    </field>
+    <variable name="amount1" calculation="Sum" class="java.math.BigDecimal">
+        <expression><![CDATA[$F{amount}]]></expression>
+    </variable>
+    <background splitType="Stretch"/>
+    <title height="79" splitType="Stretch">
+        <element kind="textField" uuid="0e3d67f2-b1ac-4f61-a64e-bba62d045b27" x="0" y="0" width="460" height="30">
+            <expression><![CDATA[$P{TEST1_ID}]]></expression>
+        </element>
+    </title>
+    <pageHeader height="50" splitType="Stretch">
+        <element kind="textField" uuid="a3979918-600a-44e8-9635-2812b954e62e" x="0" y="10" width="380" height="30">
+            <expression><![CDATA[$F{id}]]></expression>
+        </element>
+        <element kind="textField" uuid="9a8e1e4a-d4b7-4f8f-9d09-e508f62885b5" x="450" y="10" width="100" height="30">
+            <expression><![CDATA[$F{created}]]></expression>
+        </element>
+    </pageHeader>
+    <columnHeader height="35" splitType="Stretch">
+        <element kind="staticText" uuid="c516ab21-727d-42b7-8c7a-748f48f1c865" x="290" y="0" width="100" height="30">
+            <text><![CDATA[val]]></text>
+            <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="256796ca-33ae-4b23-a237-bf55c9622764"/>
+        </element>
+        <element kind="staticText" uuid="943db53d-d694-45d3-a4aa-ee90170731fa" x="400" y="0" width="100" height="30">
+            <text><![CDATA[amount]]></text>
+            <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7bc2392a-a8c2-4cb4-9779-db783a773a53"/>
+        </element>
+    </columnHeader>
+    <detail>
+        <band height="36" splitType="Stretch">
+            <element kind="textField" uuid="9b1ee197-7608-4cf6-806f-dd4351a1ba44" x="290" y="0" width="100" height="30">
+                <expression><![CDATA[$F{val}]]></expression>
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="256796ca-33ae-4b23-a237-bf55c9622764"/>
+            </element>
+            <element kind="textField" uuid="dfa0271e-5719-425c-9091-8e3fb47f8704" x="400" y="0" width="100" height="30">
+                <expression><![CDATA[$F{amount}]]></expression>
+                <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7bc2392a-a8c2-4cb4-9779-db783a773a53"/>
+            </element>
+        </band>
+    </detail>
+    <columnFooter height="45" splitType="Stretch"/>
+    <pageFooter height="54" splitType="Stretch"/>
+    <summary height="53" splitType="Stretch">
+        <element kind="textField" uuid="af160034-3088-49c1-aa03-8a1133b549a1" x="400" y="10" width="100" height="30">
+            <expression><![CDATA[$V{amount1}]]></expression>
+        </element>
+    </summary>
+</jasperReport>
