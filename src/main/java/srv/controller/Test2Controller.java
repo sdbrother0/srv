@@ -41,7 +41,7 @@ public class Test2Controller {
                     "url" : "http://localhost:8090/test2",
                     "name": "test2",
                     "key": "id",
-                    "showSelect": true,
+                    "showSelect": false,
                     "showAction": true,
                     "showLoader": true,
                     "fields": [
