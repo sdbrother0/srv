@@ -1,9 +1,14 @@
-package srv.mapper;
+package srv.mapper.service;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import srv.mapper.ProductMapper;
+import srv.mapper.Test1Mapper;
+import srv.mapper.Test2Mapper;
+import srv.mapper.Test3Mapper;
+import srv.mapper.Test4Mapper;
 
 @Service
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

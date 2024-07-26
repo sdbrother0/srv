@@ -1,4 +1,4 @@
-package srv.service;
+package srv.service.helper;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;

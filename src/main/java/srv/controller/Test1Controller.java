@@ -4,7 +4,7 @@ import srv.dto.meta.MetaData;
 import srv.entity.Test1Entity;
 import srv.repository.Test1Repository;
 import srv.dto.Table1Dto;
-import srv.service.ReportService;
+import srv.service.helper.ReportService;
 import srv.specification.SimpleLikeSpecification;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import srv.mapper.MapperService;
+import srv.mapper.service.MapperService;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
