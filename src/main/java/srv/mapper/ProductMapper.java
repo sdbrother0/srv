@@ -7,5 +7,6 @@ import srv.entity.ProductEntity;
 @Mapper
 public interface ProductMapper {
     ProductEntity map(ProductDto productDto);
+
     ProductDto map(ProductEntity productEntity);
 }

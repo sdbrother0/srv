@@ -74,7 +74,15 @@ public class ProductService {
                             "name": "name",
                             "label": "Product name",
                             "type": {
-                                "name": "text"
+                                "name": "string"
+                            },
+                            "editable": true
+                        },
+                        {
+                            "name": "price",
+                            "label": "Product price",
+                            "type": {
+                                "name": "number"
                             },
                             "editable": true
                         }
