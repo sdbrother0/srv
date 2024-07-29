@@ -15,6 +15,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "customer")
 public class CustomerEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
