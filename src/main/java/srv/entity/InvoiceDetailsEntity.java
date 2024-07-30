@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -40,5 +41,11 @@ public class InvoiceDetailsEntity {
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;
+
+    @Column(name = "tax", nullable = false)
+    private BigDecimal tax;
+
+    @Formula("(price + tax) * quantity")
+    private BigDecimal amount;
 
 }

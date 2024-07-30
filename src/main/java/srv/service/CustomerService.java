@@ -2,6 +2,7 @@ package srv.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +30,7 @@ public class CustomerService {
 
     private final CustomerRepository productRepository;
     private final ObjectMapper objectMapper;
+    private final EntityManager entityManager;
 
     public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
@@ -49,6 +51,8 @@ public class CustomerService {
     public CustomerDto save(@RequestBody CustomerDto productDto) {
         CustomerEntity productEntity = customerMapper.map(productDto);
         CustomerEntity savedProductEntity = productRepository.save(productEntity);
+        entityManager.flush();
+        entityManager.refresh(savedProductEntity);
         return customerMapper.map(savedProductEntity);
     }
 

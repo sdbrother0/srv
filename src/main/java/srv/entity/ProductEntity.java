@@ -31,4 +31,7 @@ public class ProductEntity {
     @Formula("price + price * 0.2")
     private BigDecimal taxedPrice;
 
+    @Formula("price * 0.2")
+    private BigDecimal tax;
+
 }

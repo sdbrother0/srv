@@ -11,4 +11,6 @@ public class InvoiceDetailsDto {
     private ProductDto product;
     private Integer quantity;
     private BigDecimal price;
+    private BigDecimal tax;
+    private BigDecimal amount;
 }

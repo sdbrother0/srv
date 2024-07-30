@@ -34,7 +34,7 @@ public class InvoiceEntity {
     @JoinColumn(name="customer_id")
     private CustomerEntity customer;
 
-    @Formula(value="(select coalesce(sum(inv_d.price * inv_d.quantity), 0) FROM invoice_details inv_d WHERE inv_d.invoice_id = id)")
+    @Formula(value="(select coalesce(sum((inv_d.tax + inv_d.price) * inv_d.quantity), 0) FROM invoice_details inv_d WHERE inv_d.invoice_id = id)")
     private Long total;
 
 

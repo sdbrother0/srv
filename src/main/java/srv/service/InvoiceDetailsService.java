@@ -20,6 +20,7 @@ import srv.repository.InvoiceDetailsRepository;
 import srv.repository.InvoiceRepository;
 import srv.specification.SimpleLikeSpecification;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -66,11 +67,12 @@ public class InvoiceDetailsService {
 
         InvoiceDetailsEntity invoiceDetailsEntity = invoiceDetailsMapper.map(invoiceDetailsDto);
         invoiceDetailsEntity.setInvoice(invoiceEntity);
+        invoiceDetailsEntity.setTax(invoiceDetailsDto.getPrice().multiply(BigDecimal.valueOf(0.20)));
         invoiceDetailsRepository.save(invoiceDetailsEntity);
 
         entityManager.flush();
         entityManager.refresh(invoiceEntity);
-
+        entityManager.refresh(invoiceDetailsEntity);
         return invoiceDetailsMapper.map(invoiceDetailsEntity);
     }
 
@@ -101,8 +103,9 @@ public class InvoiceDetailsService {
                                 "foreignKey": "product_id",
                                 "keyFieldName": "id",
                                 "valFieldName": "name",
-                                "mapping": {
-                                    "price": "taxedPrice",
+                                "masterMapping": {
+                                    "price": "price",
+                                    "tax": "tax",
                                     "quantity": "1"
                                  }
                             },
@@ -125,6 +128,18 @@ public class InvoiceDetailsService {
                             "editable": true
                         },
                         {
+                            "name": "tax",
+                            "label": "Tax",
+                            "type": {
+                                "name": "number"
+                            },  
+                            "validation": {
+                                "required": true,
+                                "message": "Input tax please!!!"
+                            },
+                            "editable": true
+                        },
+                        {
                             "name": "quantity",
                             "label": "Quantity",
                             "type": {
@@ -135,6 +150,14 @@ public class InvoiceDetailsService {
                                 "message": "Input quantity please!!!"
                             },
                             "editable": true
+                        },
+                        {
+                            "name": "amount",
+                            "label": "Amount",
+                            "type": {
+                                "name": "number"
+                            },
+                            "editable": false
                         }
                     ]
                 }

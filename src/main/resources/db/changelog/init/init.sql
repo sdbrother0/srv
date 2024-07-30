@@ -33,7 +33,8 @@ CREATE TABLE invoice_details
     invoice_id bigint references invoice (id) on delete cascade,
     product_id bigint references product (id),
     quantity   integer,
-    price      numeric(18, 2)
+    price      numeric(18, 2),
+    tax        numeric(18, 2)
 );
 
 

@@ -17,7 +17,7 @@ public class FieldType {
     private String foreignKey;
     private String valFieldName;
     private String keyFieldName;
-    private Map<String, String> mapping;
+    private Map<String, String> masterMapping;
 
     //date
     private String format;
