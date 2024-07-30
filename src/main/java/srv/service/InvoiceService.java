@@ -3,6 +3,10 @@ package srv.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,20 +18,28 @@ import srv.dto.InvoiceDto;
 import srv.dto.meta.MetaData;
 import srv.entity.InvoiceEntity;
 import srv.repository.InvoiceRepository;
+import srv.service.helper.ReportService;
 import srv.specification.SimpleLikeSpecification;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static srv.mapper.service.MapperService.invoiceMapper;
 
 @RequiredArgsConstructor
 @Service
+@Log4j2
 public class InvoiceService {
 
     private final ObjectMapper objectMapper;
     private final InvoiceRepository invoiceRepository;
+    private final DataSource dataSource;
+    private final ReportService reportService;
 
     public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
@@ -49,6 +61,18 @@ public class InvoiceService {
         InvoiceEntity invoiceEntity = invoiceMapper.map(invoiceDto);
         InvoiceEntity savedInvoiceEntity = invoiceRepository.save(invoiceEntity);
         return invoiceMapper.map(savedInvoiceEntity);
+    }
+
+    public byte[] getInvoiceReport(Long id) {
+        try (Connection connection = dataSource.getConnection()) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("INVOICE_ID", id);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reportService.getInvoice(), params, connection);
+            return JasperExportManager.exportReportToPdf(jasperPrint);
+        } catch (Exception e) {
+            log.error("Error report", e);
+        }
+        return new byte[0];
     }
 
     public MetaData getMetaData() throws JsonProcessingException {
@@ -105,6 +129,14 @@ public class InvoiceService {
                                 "name": "number"
                             },
                             "editable": false
+                        },
+                        {
+                            "name": "taxTotal",
+                            "label": "Tax total",
+                            "type": {
+                                "name": "number"
+                            },
+                            "editable": false
                         }
                     ],
                     "details": [
@@ -115,12 +147,8 @@ public class InvoiceService {
                     ],
                     "reports": [
                         {
-                            "label": "Invoice (report 001)",
-                            "url": "http://localhost:8090/report01"
-                        },
-                        {
-                            "label": "Report 2",
-                            "url": "http://localhost:8090/report02"
+                            "label": "Invoice pdf",
+                            "url": "http://localhost:8090/reports/invoice"
                         }
                     ]
                 }

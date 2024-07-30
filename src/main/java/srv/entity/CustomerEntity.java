@@ -27,6 +27,9 @@ public class CustomerEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "street")
     private String street;
 
@@ -42,7 +45,7 @@ public class CustomerEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Formula("trim(first_name) || ' ' || trim(last_name)")
+    @Formula("trim(email) || ' (' || trim(first_name) || ' ' || trim(last_name) || ')'")
     private String name;
 
 }

@@ -10,4 +10,5 @@ public class InvoiceDto {
     private LocalDateTime created;
     private CustomerDto customer;
     private Long total;
+    private Long taxTotal;
 }

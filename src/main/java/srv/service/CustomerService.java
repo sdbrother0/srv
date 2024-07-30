@@ -91,6 +91,14 @@ public class CustomerService {
                             "editable": true
                         },
                         {
+                            "name": "email",
+                            "label": "Email",
+                            "type": {
+                                "name": "string"
+                            },
+                            "editable": true
+                        },
+                        {
                             "name": "street",
                             "label": "Street",
                             "type": {

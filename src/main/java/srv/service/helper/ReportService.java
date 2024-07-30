@@ -10,9 +10,9 @@ import java.io.InputStream;
 
 @Service
 public class ReportService {
-    @Cacheable(value = "rep01")
-    public JasperReport getReport01() throws JRException {
-        InputStream inputStream = getClass().getResourceAsStream("/reports/rep01.jrxml");
+    @Cacheable(value = "invoice")
+    public JasperReport getInvoice() throws JRException {
+        InputStream inputStream = getClass().getResourceAsStream("/reports/invoice.jrxml");
         return JasperCompileManager.compileReport(inputStream);
     }
 }

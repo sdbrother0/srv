@@ -10,7 +10,7 @@ CREATE TABLE product
 CREATE TABLE customer
 (
     id           bigserial primary key,
-    name         varchar,
+    email        varchar,
     first_name   varchar,
     last_name    varchar,
     street       varchar,

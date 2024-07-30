@@ -68,7 +68,7 @@ public class InvoiceDetailsService {
         InvoiceDetailsEntity invoiceDetailsEntity = invoiceDetailsMapper.map(invoiceDetailsDto);
         invoiceDetailsEntity.setInvoice(invoiceEntity);
         invoiceDetailsEntity.setTax(invoiceDetailsDto.getPrice().multiply(BigDecimal.valueOf(0.20)));
-        invoiceDetailsRepository.save(invoiceDetailsEntity);
+        invoiceDetailsEntity = invoiceDetailsRepository.save(invoiceDetailsEntity);
 
         entityManager.flush();
         entityManager.refresh(invoiceEntity);
