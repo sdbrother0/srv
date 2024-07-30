@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 @Getter
 @Setter
@@ -40,5 +41,8 @@ public class CustomerEntity {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Formula("trim(first_name) || ' ' || trim(last_name)")
+    private String name;
 
 }

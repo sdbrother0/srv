@@ -2,8 +2,10 @@ package srv.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -11,57 +13,72 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import srv.dto.InvoiceDetailsDto;
-import srv.dto.InvoiceDto;
 import srv.dto.meta.MetaData;
 import srv.entity.InvoiceDetailsEntity;
 import srv.entity.InvoiceEntity;
-import srv.mapper.InvoiceDetailsMapper;
-import srv.mapper.InvoiceMapper;
 import srv.repository.InvoiceDetailsRepository;
 import srv.repository.InvoiceRepository;
 import srv.specification.SimpleLikeSpecification;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 import static srv.mapper.service.MapperService.invoiceDetailsMapper;
+import static srv.mapper.service.MapperService.invoiceMapper;
 
 @RequiredArgsConstructor
 @Service
 public class InvoiceDetailsService {
 
     private final ObjectMapper objectMapper;
-    private final InvoiceDetailsRepository invoiceRepository;
+    private final InvoiceDetailsRepository invoiceDetailsRepository;
+    private final InvoiceRepository invoiceRepository;
+    private final EntityManager entityManager;
 
-    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
+        if (Objects.isNull(masterId)) {
+            return new PageImpl<>(Collections.emptyList());
+        }
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<InvoiceDetailsEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null);
-        return invoiceRepository.findAll(simpleLikeSpecification, pageable).map(invoiceDetailsMapper::map);
+        Specification<InvoiceDetailsEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null, Map.of("invoice.id", masterId));
+        return invoiceDetailsRepository.findAll(simpleLikeSpecification, pageable).map(invoiceDetailsMapper::map);
     }
 
     @Transactional
     public InvoiceDetailsDto delete(@RequestParam Long id) {
-        InvoiceDetailsEntity invoiceEntity = invoiceRepository.findById(id).orElseThrow();
-        invoiceRepository.deleteById(id);
-        return invoiceDetailsMapper.map(invoiceEntity);
+        InvoiceDetailsEntity invoiceDetailsEntity = invoiceDetailsRepository.findById(id).orElseThrow();
+        invoiceDetailsRepository.deleteById(id);
+        InvoiceEntity invoiceEntity = invoiceRepository.findById(invoiceDetailsEntity.getInvoice().getId()).orElseThrow();
+        entityManager.flush();
+        entityManager.refresh(invoiceEntity);
+        return invoiceDetailsMapper.map(invoiceDetailsEntity);
     }
 
     @Transactional
     public InvoiceDetailsDto save(@RequestBody InvoiceDetailsDto invoiceDetailsDto) {
+        InvoiceEntity invoiceEntity = invoiceMapper.map(invoiceDetailsDto.getInvoice());
+        invoiceEntity = invoiceRepository.save(invoiceEntity);
+
         InvoiceDetailsEntity invoiceDetailsEntity = invoiceDetailsMapper.map(invoiceDetailsDto);
-        InvoiceDetailsEntity savedInvoiceDetailsEntity = invoiceRepository.save(invoiceDetailsEntity);
-        return invoiceDetailsMapper.map(savedInvoiceDetailsEntity);
+        invoiceDetailsEntity.setInvoice(invoiceEntity);
+        invoiceDetailsRepository.save(invoiceDetailsEntity);
+
+        entityManager.flush();
+        entityManager.refresh(invoiceEntity);
+
+        return invoiceDetailsMapper.map(invoiceDetailsEntity);
     }
 
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "http://localhost:8090/invoice",
-                    "name": "invoice",
+                    "url" : "http://localhost:8090/invoice_details",
+                    "name": "invoice_details",
                     "key": "id",
                     "showSelect": true,
                     "showAction": true,
@@ -69,11 +86,55 @@ public class InvoiceDetailsService {
                     "fields": [
                         {
                             "name": "id",
-                            "label": "Invoice ID",
+                            "label": "Invoice details id",
                             "type": {
                                 "name": "string"
                             },
-                            "hidden": false
+                            "hidden": true
+                        },
+                        {
+                            "name": "product",
+                            "label": "Product",
+                            "type": {
+                                "name": "lookup",
+                                "metaUrl": "http://localhost:8090/meta/product",
+                                "foreignKey": "product_id",
+                                "keyFieldName": "id",
+                                "valFieldName": "name",
+                                "mapping": {
+                                    "price": "taxedPrice",
+                                    "quantity": "1"
+                                 }
+                            },
+                            "validation": {
+                                "required": true,
+                                "message": "Select product please!!!"
+                            },
+                            "editable": true
+                        },
+                        {
+                            "name": "price",
+                            "label": "Price",
+                            "type": {
+                                "name": "number"
+                            },
+                            "validation": {
+                                "required": true,
+                                "message": "Input price please!!!"
+                            },
+                            "editable": true
+                        },
+                        {
+                            "name": "quantity",
+                            "label": "Quantity",
+                            "type": {
+                                "name": "number"
+                            },
+                            "validation": {
+                                "required": true,
+                                "message": "Input quantity please!!!"
+                            },
+                            "editable": true
                         }
                     ]
                 }

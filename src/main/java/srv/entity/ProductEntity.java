@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import java.math.BigDecimal;
 
@@ -26,5 +27,8 @@ public class ProductEntity {
 
     @Column
     private BigDecimal price;
+
+    @Formula("price + price * 0.2")
+    private BigDecimal taxedPrice;
 
 }

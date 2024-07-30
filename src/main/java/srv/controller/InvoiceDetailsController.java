@@ -10,20 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import srv.dto.CustomerDto;
 import srv.dto.InvoiceDetailsDto;
 import srv.dto.meta.MetaData;
 import srv.service.InvoiceDetailsService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 public class InvoiceDetailsController {
 
     private final InvoiceDetailsService invoiceDetailsService;
-    private static final String DATA_URL = "/invoice/details";
+    private static final String DATA_URL = "/invoice_details";
 
     @GetMapping("/meta" + DATA_URL)
     public MetaData getMetaData() throws JsonProcessingException {
@@ -31,7 +29,7 @@ public class InvoiceDetailsController {
     }
 
     @GetMapping(DATA_URL)
-    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         return invoiceDetailsService.findAll(pageable, masterId, search);
     }
 

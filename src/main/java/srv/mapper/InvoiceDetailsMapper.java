@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import srv.dto.InvoiceDetailsDto;
 import srv.entity.InvoiceDetailsEntity;
 
-@Mapper
+@Mapper(uses = {InvoiceMapper.class})
 public interface InvoiceDetailsMapper {
     InvoiceDetailsEntity map(InvoiceDetailsDto invoiceDetailsDto);
 

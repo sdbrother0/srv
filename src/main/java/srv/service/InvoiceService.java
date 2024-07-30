@@ -19,7 +19,6 @@ import srv.specification.SimpleLikeSpecification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import static srv.mapper.service.MapperService.invoiceMapper;
 
@@ -30,7 +29,7 @@ public class InvoiceService {
     private final ObjectMapper objectMapper;
     private final InvoiceRepository invoiceRepository;
 
-    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
@@ -64,11 +63,64 @@ public class InvoiceService {
                     "fields": [
                         {
                             "name": "id",
-                            "label": "Id product",
+                            "label": "Invoice id",
                             "type": {
                                 "name": "string"
                             },
                             "hidden": false
+                        },
+                        {
+                            "name": "created",
+                            "label": "Date time",
+                            "type": {
+                                "name": "date",
+                                "format": "yyyy-MM-dd HH:mm:ss"
+                            },
+                            "editable": true,
+                            "validation": {
+                                "required": true,
+                                "message": "Input date please!!!"
+                            }
+                        },
+                        {
+                            "name": "customer",
+                            "label": "Customer",
+                            "type": {
+                                "name": "lookup",
+                                "metaUrl": "http://localhost:8090/meta/customer",
+                                "foreignKey": "customer_id",
+                                "keyFieldName": "id",
+                                "valFieldName": "name"
+                            },
+                            "validation": {
+                                "required": true,
+                                "message": "Select customer please!!!"
+                            },
+                            "editable": true
+                        },
+                        {
+                            "name": "total",
+                            "label": "Total",
+                            "type": {
+                                "name": "number"
+                            },
+                            "editable": false
+                        }
+                    ],
+                    "details": [
+                          {
+                            "label": "Invoice details",
+                            "metaUrl" : "http://localhost:8090/meta/invoice_details"
+                          }
+                    ],
+                    "reports": [
+                        {
+                            "label": "Invoice (report 001)",
+                            "url": "http://localhost:8090/report01"
+                        },
+                        {
+                            "label": "Report 2",
+                            "url": "http://localhost:8090/report02"
                         }
                     ]
                 }

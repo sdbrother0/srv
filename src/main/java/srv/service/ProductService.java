@@ -19,7 +19,6 @@ import srv.specification.SimpleLikeSpecification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import static srv.mapper.service.MapperService.productMapper;
 
@@ -30,7 +29,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ObjectMapper objectMapper;
 
-    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
