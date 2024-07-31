@@ -64,7 +64,7 @@ public class ProductService {
                     "fields": [
                         {
                             "name": "id",
-                            "label": "Id product",
+                            "label": "Id",
                             "type": {
                                 "name": "string"
                             },

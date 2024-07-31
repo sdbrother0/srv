@@ -87,7 +87,7 @@ public class InvoiceService {
                     "fields": [
                         {
                             "name": "id",
-                            "label": "Invoice id",
+                            "label": "Id",
                             "type": {
                                 "name": "string"
                             },
