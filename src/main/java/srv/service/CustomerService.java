@@ -68,7 +68,7 @@ public class CustomerService {
                     "fields": [
                         {
                             "name": "id",
-                            "label": "Id product",
+                            "label": "Id",
                             "type": {
                                 "name": "string"
                             },
