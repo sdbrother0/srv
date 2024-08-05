@@ -97,46 +97,6 @@ public class CustomerService {
                                 "name": "string"
                             },
                             "editable": true
-                        },
-                        {
-                            "name": "street",
-                            "label": "Street",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "city",
-                            "label": "City",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "state",
-                            "label": "State",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "zipCode",
-                            "label": "Zip code",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "phoneNumber",
-                            "label": "Phone number",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
                         }
                     ]
                 }
