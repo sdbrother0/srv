@@ -23,7 +23,7 @@ CREATE TABLE customer
 CREATE TABLE invoice
 (
     id          bigserial primary key,
-    created     timestamp,
+    created     timestamp without time zone,
     customer_id bigint references customer (id)
 );
 
