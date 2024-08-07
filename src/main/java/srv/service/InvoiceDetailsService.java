@@ -79,7 +79,7 @@ public class InvoiceDetailsService {
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "http://localhost:8090/invoice_details",
+                    "url" : "/invoice_details",
                     "name": "invoice_details",
                     "key": "id",
                     "showSelect": true,
@@ -99,7 +99,7 @@ public class InvoiceDetailsService {
                             "label": "Product",
                             "type": {
                                 "name": "lookup",
-                                "metaUrl": "http://localhost:8090/meta/product",
+                                "metaUrl": "/meta/product",
                                 "foreignKey": "product_id",
                                 "keyFieldName": "id",
                                 "valFieldName": "name",

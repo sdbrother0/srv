@@ -59,7 +59,7 @@ public class CustomerService {
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "http://localhost:8090/customer",
+                    "url" : "/customer",
                     "name": "customer",
                     "key": "id",
                     "showSelect": true,

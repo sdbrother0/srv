@@ -78,7 +78,7 @@ public class InvoiceService {
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "http://localhost:8090/invoice",
+                    "url" : "/invoice",
                     "name": "invoice",
                     "key": "id",
                     "showSelect": true,
@@ -111,7 +111,7 @@ public class InvoiceService {
                             "label": "Customer",
                             "type": {
                                 "name": "lookup",
-                                "metaUrl": "http://localhost:8090/meta/customer",
+                                "metaUrl": "/meta/customer",
                                 "foreignKey": "customer_id",
                                 "keyFieldName": "id",
                                 "valFieldName": "name"
@@ -142,13 +142,13 @@ public class InvoiceService {
                     "details": [
                           {
                             "label": "Invoice details",
-                            "metaUrl" : "http://localhost:8090/meta/invoice_details"
+                            "metaUrl" : "/meta/invoice_details"
                           }
                     ],
                     "reports": [
                         {
                             "label": "Invoice pdf",
-                            "url": "http://localhost:8090/reports/invoice"
+                            "url": "/reports/invoice"
                         }
                     ]
                 }

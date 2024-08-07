@@ -54,7 +54,7 @@ public class ProductService {
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "http://localhost:8090/product",
+                    "url" : "/product",
                     "name": "product",
                     "key": "id",
                     "showSelect": true,
