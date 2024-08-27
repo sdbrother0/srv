@@ -18,5 +18,5 @@ java -jar build/libs/srv-0.0.1-SNAPSHOT.jar
 ### 3. Docker build and run
 ```
 docker build -t sdbrother/srv:v0 .
-docker run -p 8090:8090 -d sdbrother/srv:v0
+docker run -e JAVA_OPTS='-Xmx256m' -p 127.0.0.1:8090:8090 -d sdbrother/srv:v0
 ```
