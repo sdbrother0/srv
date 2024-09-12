@@ -118,7 +118,7 @@ where ide1_0.invoice_id = $P{INVOICE_ID}]]></query>
         <expression><![CDATA[$F{amount}]]></expression>
     </variable>
     <variable name="tax1" resetType="Column" calculation="Sum" class="java.math.BigDecimal">
-        <expression><![CDATA[$F{tax}]]></expression>
+        <expression><![CDATA[($F{tax}).multiply(BigDecimal.valueOf($F{quantity}))]]></expression>
     </variable>
     <background splitType="Stretch"/>
     <title height="99" splitType="Stretch">
