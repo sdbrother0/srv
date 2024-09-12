@@ -20,7 +20,8 @@
        ide1_0.product_id,
        p1_0.name,
        ide1_0.quantity,
-       ide1_0.tax
+       ide1_0.tax,
+       ide1_0.tax * ide1_0.quantity tax_sum
 from invoice_details ide1_0
          join invoice i1_0 on i1_0.id = ide1_0.invoice_id
          left join customer c1_0 on c1_0.id = i1_0.customer_id
@@ -114,11 +115,16 @@ where ide1_0.invoice_id = $P{INVOICE_ID}]]></query>
         <property name="com.jaspersoft.studio.field.label" value="tax"/>
         <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
     </field>
+    <field name="tax_sum" class="java.math.BigDecimal">
+        <property name="com.jaspersoft.studio.field.name" value="tax_sum"/>
+        <property name="com.jaspersoft.studio.field.label" value="tax_sum"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+    </field>
     <variable name="amount1" resetType="Column" calculation="Sum" class="java.math.BigDecimal">
         <expression><![CDATA[$F{amount}]]></expression>
     </variable>
     <variable name="tax1" resetType="Column" calculation="Sum" class="java.math.BigDecimal">
-        <expression><![CDATA[($F{tax}).multiply(BigDecimal.valueOf($F{quantity}))]]></expression>
+        <expression><![CDATA[$F{tax_sum}]]></expression>
     </variable>
     <background splitType="Stretch"/>
     <title height="99" splitType="Stretch">
