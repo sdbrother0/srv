@@ -62,9 +62,6 @@ public class CustomerService {
                     "url" : "/customer",
                     "name": "customer",
                     "key": "id",
-                    "showSelect": true,
-                    "showAction": true,
-                    "showLoader": true,
                     "fields": [
                         {
                             "name": "id",

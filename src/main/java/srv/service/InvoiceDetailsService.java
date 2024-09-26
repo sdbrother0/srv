@@ -82,9 +82,6 @@ public class InvoiceDetailsService {
                     "url" : "/invoice_details",
                     "name": "invoice_details",
                     "key": "id",
-                    "showSelect": true,
-                    "showAction": true,
-                    "showLoader": true,
                     "fields": [
                         {
                             "name": "id",

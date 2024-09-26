@@ -57,9 +57,6 @@ public class ProductService {
                     "url" : "/product",
                     "name": "product",
                     "key": "id",
-                    "showSelect": true,
-                    "showAction": true,
-                    "showLoader": true,
                     "fields": [
                         {
                             "name": "id",

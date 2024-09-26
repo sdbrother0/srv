@@ -81,9 +81,6 @@ public class InvoiceService {
                     "url" : "/invoice",
                     "name": "invoice",
                     "key": "id",
-                    "showSelect": true,
-                    "showAction": true,
-                    "showLoader": true,
                     "fields": [
                         {
                             "name": "id",
