@@ -15,7 +15,6 @@ import srv.dto.meta.MetaData;
 import srv.service.CustomerService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class CustomerController {
     }
 
     @GetMapping(DATA_URL)
-    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         return customerService.findAll(pageable, search);
     }
 
