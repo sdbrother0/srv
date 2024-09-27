@@ -32,7 +32,7 @@ public class CustomerService {
     private final ObjectMapper objectMapper;
     private final EntityManager entityManager;
 
-    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }

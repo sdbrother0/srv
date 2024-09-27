@@ -41,7 +41,7 @@ public class InvoiceService {
     private final DataSource dataSource;
     private final ReportService reportService;
 
-    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }

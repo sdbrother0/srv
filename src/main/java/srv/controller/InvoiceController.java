@@ -33,8 +33,8 @@ public class InvoiceController {
     }
 
     @GetMapping(DATA_URL)
-    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
-        return invoiceService.findAll(pageable, masterId, search);
+    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+        return invoiceService.findAll(pageable, search);
     }
 
     @DeleteMapping(DATA_URL)

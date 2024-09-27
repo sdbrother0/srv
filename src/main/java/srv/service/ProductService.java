@@ -29,7 +29,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ObjectMapper objectMapper;
 
-    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }

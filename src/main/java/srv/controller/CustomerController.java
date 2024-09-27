@@ -31,7 +31,7 @@ public class CustomerController {
 
     @GetMapping(DATA_URL)
     public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) UUID masterId, @RequestParam(name = "search", required = false) List<String> search) {
-        return customerService.findAll(pageable, masterId, search);
+        return customerService.findAll(pageable, search);
     }
 
     @DeleteMapping(DATA_URL)

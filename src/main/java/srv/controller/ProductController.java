@@ -29,8 +29,8 @@ public class ProductController {
     }
 
     @GetMapping(DATA_URL)
-    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
-        return productService.findAll(pageable, masterId, search);
+    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+        return productService.findAll(pageable, search);
     }
 
     @DeleteMapping(DATA_URL)
