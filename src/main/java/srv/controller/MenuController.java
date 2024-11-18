@@ -28,10 +28,6 @@ public class MenuController {
         List<Menu> menuList = new ArrayList<>();
         menuList.add(Menu.builder().title("Invoice example").routes(invoiceRoutes).build());
 
-        List<Route> sprRoutes = new ArrayList<>();
-        sprRoutes.add(Route.builder().title("Spr").path("spr").metaUrl("/meta/spr").build());
-        menuList.add(Menu.builder().title("Spr example").routes(sprRoutes).build());
-
         return menuList;
     }
 

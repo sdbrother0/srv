@@ -7,12 +7,6 @@ CREATE TABLE product
     price numeric(18, 2)
 );
 
-CREATE TABLE spr
-(
-    id    uuid primary key,
-    name  varchar
-);
-
 CREATE TABLE customer
 (
     id           bigserial primary key,

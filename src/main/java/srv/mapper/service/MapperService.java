@@ -8,7 +8,6 @@ import srv.domains.customer.CustomerMapper;
 import srv.domains.invoice.details.InvoiceDetailsMapper;
 import srv.domains.invoice.InvoiceMapper;
 import srv.domains.product.ProductMapper;
-import srv.domains.spr.SprMapper;
 
 @Service
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -17,5 +16,4 @@ public class MapperService {
     public static final CustomerMapper customerMapper = Mappers.getMapper(CustomerMapper.class);
     public static final InvoiceMapper invoiceMapper = Mappers.getMapper(InvoiceMapper.class);
     public static final InvoiceDetailsMapper invoiceDetailsMapper = Mappers.getMapper(InvoiceDetailsMapper.class);
-    public static final SprMapper sprMapper = Mappers.getMapper(SprMapper.class);
 }
