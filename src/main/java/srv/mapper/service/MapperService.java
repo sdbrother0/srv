@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import srv.domains.customer.CustomerMapper;
-import srv.domains.invoice.details.InvoiceDetailsMapper;
 import srv.domains.invoice.InvoiceMapper;
+import srv.domains.invoice.details.InvoiceDetailsMapper;
 import srv.domains.product.ProductMapper;
 
 @Service
