@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static srv.mapper.service.MapperService.invoiceDetailsMapper;
-import static srv.mapper.service.MapperService.invoiceMapper;
+import static srv.mapper.MapperService.invoiceDetailsMapper;
+import static srv.mapper.MapperService.invoiceMapper;
 
 @RequiredArgsConstructor
 @Service

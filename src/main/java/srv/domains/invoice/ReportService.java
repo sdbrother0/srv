@@ -1,4 +1,4 @@
-package srv.service.helper;
+package srv.domains.invoice;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
