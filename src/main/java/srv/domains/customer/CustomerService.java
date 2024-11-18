@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static srv.mapper.service.MapperService.customerMapper;
+import static srv.mapper.MapperService.customerMapper;
 
 @RequiredArgsConstructor
 @Service
