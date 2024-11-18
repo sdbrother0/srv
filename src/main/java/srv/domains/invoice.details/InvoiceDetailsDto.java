@@ -1,6 +1,8 @@
-package srv.dto;
+package srv.domains.invoice.details;
 
 import lombok.Data;
+import srv.domains.invoice.InvoiceDto;
+import srv.domains.product.ProductDto;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package srv.entity;
+package srv.domains.customer;
 
 
 import jakarta.persistence.Column;

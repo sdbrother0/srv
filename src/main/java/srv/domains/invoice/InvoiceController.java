@@ -1,4 +1,4 @@
-package srv.controller;
+package srv.domains.invoice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import srv.dto.InvoiceDto;
 import srv.dto.meta.MetaData;
-import srv.service.InvoiceService;
 
 import java.util.List;
 

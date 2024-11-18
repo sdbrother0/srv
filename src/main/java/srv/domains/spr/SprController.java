@@ -1,4 +1,4 @@
-package srv.controller;
+package srv.domains.spr;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -10,37 +10,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import srv.dto.CustomerDto;
 import srv.dto.meta.MetaData;
-import srv.service.CustomerService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-public class CustomerController {
+public class SprController {
 
-    private final CustomerService customerService;
-    private static final String DATA_URL = "/customer";
+    private final SprService productService;
+    private static final String DATA_URL = "/spr";
 
     @GetMapping("/meta" + DATA_URL)
     public MetaData getMetaData() throws JsonProcessingException {
-        return customerService.getMetaData();
+        return productService.getMetaData();
     }
 
     @GetMapping(DATA_URL)
-    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
-        return customerService.findAll(pageable, search);
+    public Page<SprDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+        return productService.findAll(pageable, search);
     }
 
     @DeleteMapping(DATA_URL)
-    public CustomerDto delete(@RequestParam Long id) {
-        return customerService.delete(id);
+    public SprDto delete(@RequestParam UUID id) {
+        return productService.delete(id);
     }
 
     @PostMapping(DATA_URL)
-    public CustomerDto save(@RequestBody CustomerDto customerDto) {
-        return customerService.save(customerDto);
+    public SprDto save(@RequestBody SprDto sprDto) {
+        return productService.save(sprDto);
     }
 
 }

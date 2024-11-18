@@ -1,8 +1,6 @@
-package srv.mapper;
+package srv.domains.customer;
 
 import org.mapstruct.Mapper;
-import srv.dto.CustomerDto;
-import srv.entity.CustomerEntity;
 
 @Mapper
 public interface CustomerMapper {

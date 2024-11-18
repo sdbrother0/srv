@@ -1,7 +1,8 @@
-package srv.service;
+package srv.domains.customer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,52 +11,52 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import srv.dto.ProductDto;
 import srv.dto.meta.MetaData;
-import srv.entity.ProductEntity;
-import srv.repository.ProductRepository;
 import srv.specification.SimpleLikeSpecification;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static srv.mapper.service.MapperService.productMapper;
+import static srv.mapper.service.MapperService.customerMapper;
 
 @RequiredArgsConstructor
 @Service
-public class ProductService {
+public class CustomerService {
 
-    private final ProductRepository productRepository;
+    private final CustomerRepository productRepository;
     private final ObjectMapper objectMapper;
+    private final EntityManager entityManager;
 
-    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<ProductEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null);
-        return productRepository.findAll(simpleLikeSpecification, pageable).map(productMapper::map);
+        Specification<CustomerEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null);
+        return productRepository.findAll(simpleLikeSpecification, pageable).map(customerMapper::map);
     }
 
     @Transactional
-    public ProductDto delete(@RequestParam Long id) {
-        ProductEntity productEntity = productRepository.findById(id).orElseThrow();
+    public CustomerDto delete(@RequestParam Long id) {
+        CustomerEntity productEntity = productRepository.findById(id).orElseThrow();
         productRepository.deleteById(id);
-        return productMapper.map(productEntity);
+        return customerMapper.map(productEntity);
     }
 
     @Transactional
-    public ProductDto save(@RequestBody ProductDto productDto) {
-        ProductEntity productEntity = productMapper.map(productDto);
-        ProductEntity savedProductEntity = productRepository.save(productEntity);
-        return productMapper.map(savedProductEntity);
+    public CustomerDto save(@RequestBody CustomerDto productDto) {
+        CustomerEntity productEntity = customerMapper.map(productDto);
+        CustomerEntity savedProductEntity = productRepository.save(productEntity);
+        entityManager.flush();
+        entityManager.refresh(savedProductEntity);
+        return customerMapper.map(savedProductEntity);
     }
 
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "/product",
-                    "name": "product",
+                    "url" : "/customer",
+                    "name": "customer",
                     "key": "id",
                     "fields": [
                         {
@@ -67,18 +68,26 @@ public class ProductService {
                             "hidden": false
                         },
                         {
-                            "name": "name",
-                            "label": "Product name",
+                            "name": "firstName",
+                            "label": "First name",
                             "type": {
                                 "name": "string"
                             },
                             "editable": true
                         },
                         {
-                            "name": "price",
-                            "label": "Product price",
+                            "name": "lastName",
+                            "label": "Last name",
                             "type": {
-                                "name": "number"
+                                "name": "string"
+                            },
+                            "editable": true
+                        },
+                        {
+                            "name": "email",
+                            "label": "Email",
+                            "type": {
+                                "name": "string"
                             },
                             "editable": true
                         }

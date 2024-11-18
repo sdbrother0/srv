@@ -1,4 +1,4 @@
-package srv.controller;
+package srv.domains.product;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -10,37 +10,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import srv.dto.InvoiceDetailsDto;
 import srv.dto.meta.MetaData;
-import srv.service.InvoiceDetailsService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class InvoiceDetailsController {
+public class ProductController {
 
-    private final InvoiceDetailsService invoiceDetailsService;
-    private static final String DATA_URL = "/invoice_details";
+    private final ProductService productService;
+    private static final String DATA_URL = "/product";
 
     @GetMapping("/meta" + DATA_URL)
     public MetaData getMetaData() throws JsonProcessingException {
-        return invoiceDetailsService.getMetaData();
+        return productService.getMetaData();
     }
 
     @GetMapping(DATA_URL)
-    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
-        return invoiceDetailsService.findAll(pageable, masterId, search);
+    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+        return productService.findAll(pageable, search);
     }
 
     @DeleteMapping(DATA_URL)
-    public InvoiceDetailsDto delete(@RequestParam Long id) {
-        return invoiceDetailsService.delete(id);
+    public ProductDto delete(@RequestParam Long id) {
+        return productService.delete(id);
     }
 
     @PostMapping(DATA_URL)
-    public InvoiceDetailsDto save(@RequestBody InvoiceDetailsDto invoiceDetailsDto) {
-        return invoiceDetailsService.save(invoiceDetailsDto);
+    public ProductDto save(@RequestBody ProductDto productDto) {
+        return productService.save(productDto);
     }
 
 }

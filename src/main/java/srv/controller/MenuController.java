@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Log4j2
-public class RoutesController {
+public class MenuController {
 
     private static final String DATA_URL = "/menu";
 
@@ -27,6 +27,11 @@ public class RoutesController {
 
         List<Menu> menuList = new ArrayList<>();
         menuList.add(Menu.builder().title("Invoice example").routes(invoiceRoutes).build());
+
+        List<Route> sprRoutes = new ArrayList<>();
+        sprRoutes.add(Route.builder().title("Spr").path("spr").metaUrl("/meta/spr").build());
+        menuList.add(Menu.builder().title("Spr example").routes(sprRoutes).build());
+
         return menuList;
     }
 

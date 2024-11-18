@@ -1,4 +1,4 @@
-package srv.entity;
+package srv.domains.invoice;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import srv.domains.customer.CustomerEntity;
 
 import java.time.LocalDateTime;
 

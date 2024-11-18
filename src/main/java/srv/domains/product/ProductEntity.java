@@ -1,4 +1,4 @@
-package srv.entity;
+package srv.domains.product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

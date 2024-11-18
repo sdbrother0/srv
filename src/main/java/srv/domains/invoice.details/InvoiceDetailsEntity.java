@@ -1,4 +1,4 @@
-package srv.entity;
+package srv.domains.invoice.details;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +14,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import srv.domains.invoice.InvoiceEntity;
+import srv.domains.product.ProductEntity;
 
 import java.math.BigDecimal;
 

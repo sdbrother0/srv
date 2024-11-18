@@ -1,8 +1,6 @@
-package srv.mapper;
+package srv.domains.product;
 
 import org.mapstruct.Mapper;
-import srv.dto.ProductDto;
-import srv.entity.ProductEntity;
 
 @Mapper
 public interface ProductMapper {

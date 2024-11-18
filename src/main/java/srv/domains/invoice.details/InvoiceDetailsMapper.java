@@ -1,8 +1,7 @@
-package srv.mapper;
+package srv.domains.invoice.details;
 
 import org.mapstruct.Mapper;
-import srv.dto.InvoiceDetailsDto;
-import srv.entity.InvoiceDetailsEntity;
+import srv.domains.invoice.InvoiceMapper;
 
 @Mapper(uses = {InvoiceMapper.class})
 public interface InvoiceDetailsMapper {

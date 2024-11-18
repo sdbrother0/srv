@@ -1,7 +1,8 @@
-package srv.dto;
+package srv.domains.invoice;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import srv.domains.customer.CustomerDto;
 
 import java.time.LocalDateTime;
 

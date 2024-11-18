@@ -1,4 +1,4 @@
-package srv.dto;
+package srv.domains.product;
 
 import lombok.Data;
 
