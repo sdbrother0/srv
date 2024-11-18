@@ -1,4 +1,4 @@
-package srv.controller;
+package srv.dto;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package srv.mapper.service;
+package srv.mapper;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
