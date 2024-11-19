@@ -22,8 +22,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "invoice_details")
-public class InvoiceDetailsEntity {
+@Table(name = "invoice_product_details")
+public class InvoiceProductDetailsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

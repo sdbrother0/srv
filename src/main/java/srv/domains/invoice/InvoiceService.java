@@ -135,7 +135,7 @@ public class InvoiceService {
                     "details": [
                           {
                             "label": "Invoice details",
-                            "metaUrl" : "/meta/invoice_details"
+                            "metaUrl" : "/meta/invoice_product_details"
                           }
                     ],
                     "reports": [

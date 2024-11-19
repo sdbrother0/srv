@@ -24,65 +24,65 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static srv.mapper.MapperService.invoiceDetailsMapper;
+import static srv.mapper.MapperService.invoiceProductDetailsMapper;
 import static srv.mapper.MapperService.invoiceMapper;
 
 @RequiredArgsConstructor
 @Service
-public class InvoiceDetailsService {
+public class InvoiceProductDetailsService {
 
     private final ObjectMapper objectMapper;
-    private final InvoiceDetailsRepository invoiceDetailsRepository;
+    private final InvoiceProductDetailsRepository invoiceProductDetailsRepository;
     private final InvoiceRepository invoiceRepository;
     private final EntityManager entityManager;
 
-    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceProductDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(masterId)) {
             return new PageImpl<>(Collections.emptyList());
         }
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<InvoiceDetailsEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null, Map.of("invoice.id", masterId));
-        return invoiceDetailsRepository.findAll(simpleLikeSpecification, pageable).map(invoiceDetailsMapper::map);
+        Specification<InvoiceProductDetailsEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null, Map.of("invoice.id", masterId));
+        return invoiceProductDetailsRepository.findAll(simpleLikeSpecification, pageable).map(invoiceProductDetailsMapper::map);
     }
 
     @Transactional
-    public InvoiceDetailsDto delete(@RequestParam Long id) {
-        InvoiceDetailsEntity invoiceDetailsEntity = invoiceDetailsRepository.findById(id).orElseThrow();
-        invoiceDetailsRepository.deleteById(id);
-        InvoiceEntity invoiceEntity = invoiceRepository.findById(invoiceDetailsEntity.getInvoice().getId()).orElseThrow();
+    public InvoiceProductDetailsDto delete(@RequestParam Long id) {
+        InvoiceProductDetailsEntity invoiceProductDetailsEntity = invoiceProductDetailsRepository.findById(id).orElseThrow();
+        invoiceProductDetailsRepository.deleteById(id);
+        InvoiceEntity invoiceEntity = invoiceRepository.findById(invoiceProductDetailsEntity.getInvoice().getId()).orElseThrow();
         entityManager.flush();
         entityManager.refresh(invoiceEntity);
-        return invoiceDetailsMapper.map(invoiceDetailsEntity);
+        return invoiceProductDetailsMapper.map(invoiceProductDetailsEntity);
     }
 
     @Transactional
-    public InvoiceDetailsDto save(@RequestBody InvoiceDetailsDto invoiceDetailsDto) {
+    public InvoiceProductDetailsDto save(@RequestBody InvoiceProductDetailsDto invoiceDetailsDto) {
         InvoiceEntity invoiceEntity = invoiceMapper.map(invoiceDetailsDto.getInvoice());
         invoiceEntity = invoiceRepository.save(invoiceEntity);
 
-        InvoiceDetailsEntity invoiceDetailsEntity = invoiceDetailsMapper.map(invoiceDetailsDto);
-        invoiceDetailsEntity.setInvoice(invoiceEntity);
-        invoiceDetailsEntity.setTax(invoiceDetailsDto.getPrice().multiply(BigDecimal.valueOf(0.20)));
-        invoiceDetailsEntity = invoiceDetailsRepository.save(invoiceDetailsEntity);
+        InvoiceProductDetailsEntity invoiceProductDetailsEntity = invoiceProductDetailsMapper.map(invoiceDetailsDto);
+        invoiceProductDetailsEntity.setInvoice(invoiceEntity);
+        invoiceProductDetailsEntity.setTax(invoiceDetailsDto.getPrice().multiply(BigDecimal.valueOf(0.20)));
+        invoiceProductDetailsEntity = invoiceProductDetailsRepository.save(invoiceProductDetailsEntity);
 
         entityManager.flush();
         entityManager.refresh(invoiceEntity);
-        entityManager.refresh(invoiceDetailsEntity);
-        return invoiceDetailsMapper.map(invoiceDetailsEntity);
+        entityManager.refresh(invoiceProductDetailsEntity);
+        return invoiceProductDetailsMapper.map(invoiceProductDetailsEntity);
     }
 
     public MetaData getMetaData() throws JsonProcessingException {
         String meta = """
                 {
-                    "url" : "/invoice_details",
-                    "name": "invoice_details",
+                    "url" : "/invoice_product_details",
+                    "name": "invoice_product_details",
                     "key": "id",
                     "fields": [
                         {
                             "name": "id",
-                            "label": "Invoice details id",
+                            "label": "Invoice product details id",
                             "type": {
                                 "name": "string"
                             },

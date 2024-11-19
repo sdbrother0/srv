@@ -27,7 +27,7 @@ CREATE TABLE invoice
     customer_id bigint references customer (id)
 );
 
-CREATE TABLE invoice_details
+CREATE TABLE invoice_product_details
 (
     id         bigserial primary key,
     invoice_id bigint references invoice (id) on delete cascade,

@@ -16,29 +16,29 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class InvoiceDetailsController {
+public class InvoiceProductDetailsController {
 
-    private final InvoiceDetailsService invoiceDetailsService;
-    private static final String DATA_URL = "/invoice_details";
+    private final InvoiceProductDetailsService invoiceProductDetailsService;
+    private static final String DATA_URL = "/invoice_product_details";
 
     @GetMapping("/meta" + DATA_URL)
     public MetaData getMetaData() throws JsonProcessingException {
-        return invoiceDetailsService.getMetaData();
+        return invoiceProductDetailsService.getMetaData();
     }
 
     @GetMapping(DATA_URL)
-    public Page<InvoiceDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
-        return invoiceDetailsService.findAll(pageable, masterId, search);
+    public Page<InvoiceProductDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
+        return invoiceProductDetailsService.findAll(pageable, masterId, search);
     }
 
     @DeleteMapping(DATA_URL)
-    public InvoiceDetailsDto delete(@RequestParam Long id) {
-        return invoiceDetailsService.delete(id);
+    public InvoiceProductDetailsDto delete(@RequestParam Long id) {
+        return invoiceProductDetailsService.delete(id);
     }
 
     @PostMapping(DATA_URL)
-    public InvoiceDetailsDto save(@RequestBody InvoiceDetailsDto invoiceDetailsDto) {
-        return invoiceDetailsService.save(invoiceDetailsDto);
+    public InvoiceProductDetailsDto save(@RequestBody InvoiceProductDetailsDto invoiceProductDetailsDto) {
+        return invoiceProductDetailsService.save(invoiceProductDetailsDto);
     }
 
 }

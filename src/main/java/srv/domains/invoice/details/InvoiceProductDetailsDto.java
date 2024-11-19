@@ -7,7 +7,7 @@ import srv.domains.product.ProductDto;
 import java.math.BigDecimal;
 
 @Data
-public class InvoiceDetailsDto {
+public class InvoiceProductDetailsDto {
     private Long id;
     private InvoiceDto invoice;
     private ProductDto product;

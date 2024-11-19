@@ -22,7 +22,7 @@
        ide1_0.quantity,
        ide1_0.tax,
        ide1_0.tax * ide1_0.quantity tax_sum
-from invoice_details ide1_0
+from invoice_product_details ide1_0
          join invoice i1_0 on i1_0.id = ide1_0.invoice_id
          left join customer c1_0 on c1_0.id = i1_0.customer_id
          join product p1_0 on p1_0.id = ide1_0.product_id
@@ -34,7 +34,7 @@ where ide1_0.invoice_id = $P{INVOICE_ID}]]></query>
     <field name="invoice_id" class="java.lang.Long">
         <property name="com.jaspersoft.studio.field.name" value="invoice_id"/>
         <property name="com.jaspersoft.studio.field.label" value="invoice_id"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_product_details"/>
     </field>
     <field name="id" class="java.lang.Long">
         <property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -93,12 +93,12 @@ where ide1_0.invoice_id = $P{INVOICE_ID}]]></query>
     <field name="price" class="java.math.BigDecimal">
         <property name="com.jaspersoft.studio.field.name" value="price"/>
         <property name="com.jaspersoft.studio.field.label" value="price"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_product_details"/>
     </field>
     <field name="product_id" class="java.lang.Long">
         <property name="com.jaspersoft.studio.field.name" value="product_id"/>
         <property name="com.jaspersoft.studio.field.label" value="product_id"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_product_details"/>
     </field>
     <field name="name" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.name" value="name"/>
@@ -108,17 +108,17 @@ where ide1_0.invoice_id = $P{INVOICE_ID}]]></query>
     <field name="quantity" class="java.lang.Integer">
         <property name="com.jaspersoft.studio.field.name" value="quantity"/>
         <property name="com.jaspersoft.studio.field.label" value="quantity"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_product_details"/>
     </field>
     <field name="tax" class="java.math.BigDecimal">
         <property name="com.jaspersoft.studio.field.name" value="tax"/>
         <property name="com.jaspersoft.studio.field.label" value="tax"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_product_details"/>
     </field>
     <field name="tax_sum" class="java.math.BigDecimal">
         <property name="com.jaspersoft.studio.field.name" value="tax_sum"/>
         <property name="com.jaspersoft.studio.field.label" value="tax_sum"/>
-        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_details"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="invoice_product_details"/>
     </field>
     <variable name="amount1" resetType="Column" calculation="Sum" class="java.math.BigDecimal">
         <expression><![CDATA[$F{amount}]]></expression>
