@@ -1,7 +1,7 @@
-package srv.domains.invoice.details;
+package srv.domains.invoice.details.product;
 
 import org.mapstruct.Mapper;
-import srv.domains.invoice.InvoiceMapper;
+import srv.domains.invoice.master.InvoiceMapper;
 
 @Mapper(uses = {InvoiceMapper.class})
 public interface InvoiceProductDetailsMapper {

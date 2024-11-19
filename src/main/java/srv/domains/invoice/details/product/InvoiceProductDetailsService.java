@@ -1,4 +1,4 @@
-package srv.domains.invoice.details;
+package srv.domains.invoice.details.product;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import srv.dto.meta.MetaData;
-import srv.domains.invoice.InvoiceEntity;
-import srv.domains.invoice.InvoiceRepository;
+import srv.domains.invoice.master.InvoiceEntity;
+import srv.domains.invoice.master.InvoiceRepository;
 import srv.specification.SimpleLikeSpecification;
 
 import java.math.BigDecimal;

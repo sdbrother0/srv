@@ -1,4 +1,4 @@
-package srv.domains.invoice;
+package srv.domains.invoice.master;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package srv.domains.invoice.details;
+package srv.domains.invoice.details.product;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;

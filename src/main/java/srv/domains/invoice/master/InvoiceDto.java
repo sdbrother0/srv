@@ -1,4 +1,4 @@
-package srv.domains.invoice;
+package srv.domains.invoice.master;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

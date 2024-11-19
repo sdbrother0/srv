@@ -1,4 +1,4 @@
-package srv.domains.invoice;
+package srv.domains.invoice.master;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package srv.domains.invoice;
+package srv.domains.invoice.master;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
