@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +28,10 @@ public class CustomerController {
     }
 
     @GetMapping(DATA_URL)
-    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
-        return customerService.findAll(pageable, search);
+    public Page<CustomerDto> findAll(Pageable pageable,
+                                     @RequestParam(name = "search", required = false) List<String> search,
+                                     @RequestParam(name = "keyValue", required = false) String keyValue) {
+        return customerService.findAll(pageable, search, keyValue);
     }
 
     @DeleteMapping(DATA_URL)
