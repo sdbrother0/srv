@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static srv.mapper.MapperService.customerMapper;
+import static srv.service.MapperService.customerMapper;
 
 @RequiredArgsConstructor
 @Service
@@ -27,12 +28,13 @@ public class CustomerService {
     private final CustomerRepository productRepository;
     private final ObjectMapper objectMapper;
     private final EntityManager entityManager;
+    private MetaData metaData;
 
-    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search, String keyValue) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<CustomerEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null);
+        Specification<CustomerEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), Objects.isNull(keyValue) ? null : Pair.of(metaData.getKey(), keyValue));
         return productRepository.findAll(simpleLikeSpecification, pageable).map(customerMapper::map);
     }
 
@@ -94,7 +96,8 @@ public class CustomerService {
                     ]
                 }
             """;
-        return objectMapper.readValue(meta, MetaData.class);
+        metaData = objectMapper.readValue(meta, MetaData.class);
+        return metaData;
     }
 
 }

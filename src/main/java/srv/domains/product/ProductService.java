@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static srv.mapper.MapperService.productMapper;
+import static srv.service.MapperService.productMapper;
 
 @RequiredArgsConstructor
 @Service
@@ -25,12 +26,15 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ObjectMapper objectMapper;
+    private MetaData metaData;
 
-    public Page<ProductDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<ProductDto> findAll(Pageable pageable,
+                                    @RequestParam(name = "search", required = false) List<String> search,
+                                    @RequestParam(name = "keyValue", required = false) String keyValue) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<ProductEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), null);
+        Specification<ProductEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), Objects.isNull(keyValue) ? null : Pair.of(metaData.getKey(), keyValue));
         return productRepository.findAll(simpleLikeSpecification, pageable).map(productMapper::map);
     }
 
@@ -82,7 +86,8 @@ public class ProductService {
                     ]
                 }
             """;
-        return objectMapper.readValue(meta, MetaData.class);
+        metaData = objectMapper.readValue(meta, MetaData.class);;
+        return metaData;
     }
 
 }
