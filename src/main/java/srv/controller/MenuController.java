@@ -1,13 +1,11 @@
 package srv.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import srv.dto.meta.Menu;
+import srv.service.MenuService;
 
 import java.util.List;
 
@@ -17,38 +15,12 @@ import java.util.List;
 public class MenuController {
 
     private static final String DATA_URL = "/menu";
-    private final ObjectMapper objectMapper;
+    private final MenuService menuService;
 
     @GetMapping("/meta" + DATA_URL)
-    public List<Menu> getRoutes() throws JsonProcessingException {
+    public List<Menu> getRoutes() {
         log.info("get routes");
-
-        String menu = """
-                [
-                    {
-                        "title": "Invoice example",
-                        "routes": [
-                            {
-                                "path": "product",
-                                "metaUrl": "/meta/product",
-                                "title": "Product"
-                            },
-                            {
-                                "path": "customer",
-                                "metaUrl": "/meta/customer",
-                                "title": "Customer"
-                            },
-                            {
-                                "path": "invoice",
-                                "metaUrl": "/meta/invoice",
-                                "title": "Invoice"
-                            }
-                        ]
-                    }
-                ]
-                """;
-        return objectMapper.readValue(menu, new TypeReference<>(){});
-
+        return menuService.getMenu();
     }
 
 }
