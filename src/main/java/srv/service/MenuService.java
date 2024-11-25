@@ -40,6 +40,16 @@ public class MenuService {
                                 "title": "Invoice"
                             }
                         ]
+                    },
+                    {
+                        "title": "Example menu",
+                        "routes": [
+                            {
+                                "path": "example",
+                                "metaUrl": "/meta/example",
+                                "title": "Example"
+                            }
+                        ]
                     }
                 ]
                 """;

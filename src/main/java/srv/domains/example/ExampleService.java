@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static srv.mapper.MapperService.exampleMapper;
+import static srv.service.MapperService.exampleMapper;
 
 @RequiredArgsConstructor
 @Service
