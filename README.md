@@ -13,5 +13,5 @@ git clone https://github.com/sdbrother0/srv.git
 cd srv
 ./gradlew build
 docker build -t sdbrother/srv:v0 .
-docker run -e JAVA_OPTS='-Xmx256m' -p 127.0.0.1:8090:8090 -d sdbrother/srv:v0
+docker run -e JAVA_OPTS='-Xmx256m' -p 0.0.0.0:8090:8090 -d sdbrother/srv:v0
 ```
