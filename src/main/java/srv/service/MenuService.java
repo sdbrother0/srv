@@ -1,14 +1,17 @@
 package srv.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import srv.dto.meta.Menu;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -16,38 +19,18 @@ import java.util.List;
 @Log4j2
 public class MenuService {
 
+    private final ResourceLoader resourceLoader;
     private final ObjectMapper objectMapper;
 
+    @Cacheable(value = "menu")
     public List<Menu> getMenu() {
-        String menu = """
-                [
-                    {
-                        "title": "Invoice example",
-                        "routes": [
-                            {
-                                "path": "product",
-                                "metaUrl": "/meta/product",
-                                "title": "Product"
-                            },
-                            {
-                                "path": "customer",
-                                "metaUrl": "/meta/customer",
-                                "title": "Customer"
-                            },
-                            {
-                                "path": "invoice",
-                                "metaUrl": "/meta/invoice",
-                                "title": "Invoice"
-                            }
-                        ]
-                    }
-                ]
-                """;
+        Resource resource = resourceLoader.getResource("classpath:menu/index.json");
         try {
-            return objectMapper.readValue(menu, new TypeReference<>(){});
-        } catch (JsonProcessingException e) {
-            log.error(e);
-            return new ArrayList<>();
+            String content = resource.getContentAsString(StandardCharsets.UTF_8);
+            return objectMapper.readValue(content, new TypeReference<>() {
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
