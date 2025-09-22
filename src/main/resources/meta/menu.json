@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Invoice example",
+    "routes": [
+      {
+        "path": "product",
+        "metaUrl": "/meta/product",
+        "title": "Product"
+      },
+      {
+        "path": "customer",
+        "metaUrl": "/meta/customer",
+        "title": "Customer"
+      },
+      {
+        "path": "invoice",
+        "metaUrl": "/meta/invoice",
+        "title": "Invoice"
+      }
+    ]
+  }
+]

@@ -21,11 +21,6 @@ public class CustomerController {
     private final CustomerService customerService;
     private static final String DATA_URL = "/customer";
 
-    @GetMapping("/meta" + DATA_URL)
-    public MetaData getMetaData() throws JsonProcessingException {
-        return customerService.getMetaData();
-    }
-
     @GetMapping(DATA_URL)
     public Page<CustomerDto> findAll(Pageable pageable,
                                      @RequestParam(name = "search", required = false) List<String> search,

@@ -1,6 +1,5 @@
 package srv.domains.invoice.details.product;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import srv.dto.meta.MetaData;
 import srv.domains.invoice.master.InvoiceEntity;
 import srv.domains.invoice.master.InvoiceRepository;
 import srv.specification.SimpleLikeSpecification;
@@ -24,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static srv.service.MapperService.invoiceProductDetailsMapper;
 import static srv.service.MapperService.invoiceMapper;
+import static srv.service.MapperService.invoiceProductDetailsMapper;
 
 @RequiredArgsConstructor
 @Service
@@ -71,92 +69,6 @@ public class InvoiceProductDetailsService {
         entityManager.refresh(invoiceEntity);
         entityManager.refresh(invoiceProductDetailsEntity);
         return invoiceProductDetailsMapper.map(invoiceProductDetailsEntity);
-    }
-
-    public MetaData getMetaData() throws JsonProcessingException {
-        String meta = """
-                {
-                    "url" : "/invoice_product_details",
-                    "name": "invoice_product_details",
-                    "key": "id",
-                    "fields": [
-                        {
-                            "name": "id",
-                            "label": "Invoice product details id",
-                            "type": {
-                                "name": "string"
-                            },
-                            "hidden": true
-                        },
-                        {
-                            "name": "product",
-                            "label": "Product",
-                            "type": {
-                                "name": "lookup",
-                                "metaUrl": "/meta/product",
-                                "foreignKey": "product_id",
-                                "keyFieldName": "id",
-                                "valFieldName": "name",
-                                "masterMapping": {
-                                    "price": "price",
-                                    "tax": "tax",
-                                    "quantity": "1"
-                                 }
-                            },
-                            "validation": {
-                                "required": true,
-                                "message": "Select product please!!!"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "price",
-                            "label": "Price",
-                            "type": {
-                                "name": "number"
-                            },
-                            "validation": {
-                                "required": true,
-                                "message": "Input price please!!!"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "tax",
-                            "label": "Tax",
-                            "type": {
-                                "name": "number"
-                            },  
-                            "validation": {
-                                "required": true,
-                                "message": "Input tax please!!!"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "quantity",
-                            "label": "Quantity",
-                            "type": {
-                                "name": "number"
-                            },
-                            "validation": {
-                                "required": true,
-                                "message": "Input quantity please!!!"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "amount",
-                            "label": "Amount",
-                            "type": {
-                                "name": "number"
-                            },
-                            "editable": false
-                        }
-                    ]
-                }
-            """;
-        return objectMapper.readValue(meta, MetaData.class);
     }
 
 }

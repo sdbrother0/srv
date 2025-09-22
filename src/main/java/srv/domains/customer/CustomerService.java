@@ -1,6 +1,5 @@
 package srv.domains.customer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -52,52 +51,6 @@ public class CustomerService {
         entityManager.flush();
         entityManager.refresh(savedProductEntity);
         return customerMapper.map(savedProductEntity);
-    }
-
-    public MetaData getMetaData() throws JsonProcessingException {
-        String meta = """
-                {
-                    "url" : "/customer",
-                    "name": "customer",
-                    "key": "id",
-                    "fields": [
-                        {
-                            "name": "id",
-                            "label": "Id",
-                            "type": {
-                                "name": "string"
-                            },
-                            "hidden": false
-                        },
-                        {
-                            "name": "firstName",
-                            "label": "First name",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "lastName",
-                            "label": "Last name",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "email",
-                            "label": "Email",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        }
-                    ]
-                }
-            """;
-        metaData = objectMapper.readValue(meta, MetaData.class);
-        return metaData;
     }
 
 }

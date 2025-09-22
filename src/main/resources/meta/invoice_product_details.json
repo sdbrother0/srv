@@ -1,0 +1,80 @@
+{
+  "url": "/invoice_product_details",
+  "name": "invoice_product_details",
+  "key": "id",
+  "fields": [
+    {
+      "name": "id",
+      "label": "Invoice product details id",
+      "type": {
+        "name": "string"
+      },
+      "hidden": true
+    },
+    {
+      "name": "product",
+      "label": "Product",
+      "type": {
+        "name": "lookup",
+        "metaUrl": "/meta/product",
+        "foreignKey": "product_id",
+        "keyFieldName": "id",
+        "valFieldName": "name",
+        "masterMapping": {
+          "price": "price",
+          "tax": "tax",
+          "quantity": "1"
+        }
+      },
+      "validation": {
+        "required": true,
+        "message": "Select product please!!!"
+      },
+      "editable": true
+    },
+    {
+      "name": "price",
+      "label": "Price",
+      "type": {
+        "name": "number"
+      },
+      "validation": {
+        "required": true,
+        "message": "Input price please!!!"
+      },
+      "editable": true
+    },
+    {
+      "name": "tax",
+      "label": "Tax",
+      "type": {
+        "name": "number"
+      },
+      "validation": {
+        "required": true,
+        "message": "Input tax please!!!"
+      },
+      "editable": true
+    },
+    {
+      "name": "quantity",
+      "label": "Quantity",
+      "type": {
+        "name": "number"
+      },
+      "validation": {
+        "required": true,
+        "message": "Input quantity please!!!"
+      },
+      "editable": true
+    },
+    {
+      "name": "amount",
+      "label": "Amount",
+      "type": {
+        "name": "number"
+      },
+      "editable": false
+    }
+  ]
+}

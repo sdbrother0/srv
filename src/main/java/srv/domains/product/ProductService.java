@@ -1,6 +1,5 @@
 package srv.domains.product;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -50,44 +49,6 @@ public class ProductService {
         ProductEntity productEntity = productMapper.map(productDto);
         ProductEntity savedProductEntity = productRepository.save(productEntity);
         return productMapper.map(savedProductEntity);
-    }
-
-    public MetaData getMetaData() throws JsonProcessingException {
-        String meta = """
-                {
-                    "url" : "/product",
-                    "name": "product",
-                    "key": "id",
-                    "fields": [
-                        {
-                            "name": "id",
-                            "label": "Id",
-                            "type": {
-                                "name": "string"
-                            },
-                            "hidden": false
-                        },
-                        {
-                            "name": "name",
-                            "label": "Product name",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "price",
-                            "label": "Product price",
-                            "type": {
-                                "name": "number"
-                            },
-                            "editable": true
-                        }
-                    ]
-                }
-            """;
-        metaData = objectMapper.readValue(meta, MetaData.class);;
-        return metaData;
     }
 
 }

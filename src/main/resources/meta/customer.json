@@ -1,0 +1,39 @@
+{
+  "url": "/customer",
+  "name": "customer",
+  "key": "id",
+  "fields": [
+    {
+      "name": "id",
+      "label": "Id",
+      "type": {
+        "name": "string"
+      },
+      "hidden": false
+    },
+    {
+      "name": "firstName",
+      "label": "First name",
+      "type": {
+        "name": "string"
+      },
+      "editable": true
+    },
+    {
+      "name": "lastName",
+      "label": "Last name",
+      "type": {
+        "name": "string"
+      },
+      "editable": true
+    },
+    {
+      "name": "email",
+      "label": "Email",
+      "type": {
+        "name": "string"
+      },
+      "editable": true
+    }
+  ]
+}

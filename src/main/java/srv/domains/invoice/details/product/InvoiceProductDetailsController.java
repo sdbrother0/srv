@@ -21,11 +21,6 @@ public class InvoiceProductDetailsController {
     private final InvoiceProductDetailsService invoiceProductDetailsService;
     private static final String DATA_URL = "/invoice_product_details";
 
-    @GetMapping("/meta" + DATA_URL)
-    public MetaData getMetaData() throws JsonProcessingException {
-        return invoiceProductDetailsService.getMetaData();
-    }
-
     @GetMapping(DATA_URL)
     public Page<InvoiceProductDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         return invoiceProductDetailsService.findAll(pageable, masterId, search);

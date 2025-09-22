@@ -21,11 +21,6 @@ public class ProductController {
     private final ProductService productService;
     private static final String DATA_URL = "/product";
 
-    @GetMapping("/meta" + DATA_URL)
-    public MetaData getMetaData() throws JsonProcessingException {
-        return productService.getMetaData();
-    }
-
     @GetMapping(DATA_URL)
     public Page<ProductDto> findAll(Pageable pageable,
                                     @RequestParam(name = "search", required = false) List<String> search,

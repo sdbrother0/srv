@@ -25,11 +25,6 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
     private static final String DATA_URL = "/invoice";
 
-    @GetMapping("/meta" + DATA_URL)
-    public MetaData getMetaData() throws JsonProcessingException {
-        return invoiceService.getMetaData();
-    }
-
     @GetMapping(DATA_URL)
     public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         return invoiceService.findAll(pageable, search);
