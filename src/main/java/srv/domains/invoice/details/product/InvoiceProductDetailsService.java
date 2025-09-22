@@ -29,7 +29,6 @@ import static srv.service.MapperService.invoiceProductDetailsMapper;
 @Service
 public class InvoiceProductDetailsService {
 
-    private final ObjectMapper objectMapper;
     private final InvoiceProductDetailsRepository invoiceProductDetailsRepository;
     private final InvoiceRepository invoiceRepository;
     private final EntityManager entityManager;

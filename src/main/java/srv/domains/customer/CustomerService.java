@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import srv.dto.meta.MetaData;
 import srv.specification.SimpleLikeSpecification;
 
 import java.util.ArrayList;
@@ -25,15 +24,13 @@ import static srv.service.MapperService.customerMapper;
 public class CustomerService {
 
     private final CustomerRepository productRepository;
-    private final ObjectMapper objectMapper;
     private final EntityManager entityManager;
-    private MetaData metaData;
 
     public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search, String keyValue) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<CustomerEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), Objects.isNull(keyValue) ? null : Pair.of(metaData.getKey(), keyValue));
+        Specification<CustomerEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), Objects.isNull(keyValue) ? null : Pair.of("id", keyValue));
         return productRepository.findAll(simpleLikeSpecification, pageable).map(customerMapper::map);
     }
 

@@ -1,5 +1,6 @@
 package srv.domains.product;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,8 +25,6 @@ import static srv.service.MapperService.productMapper;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final ObjectMapper objectMapper;
-    private MetaData metaData;
 
     public Page<ProductDto> findAll(Pageable pageable,
                                     @RequestParam(name = "search", required = false) List<String> search,
@@ -33,7 +32,7 @@ public class ProductService {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
-        Specification<ProductEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), Objects.isNull(keyValue) ? null : Pair.of(metaData.getKey(), keyValue));
+        Specification<ProductEntity> simpleLikeSpecification = new SimpleLikeSpecification<>(search, pageable.getSort(), Objects.isNull(keyValue) ? null : Pair.of("id", keyValue));
         return productRepository.findAll(simpleLikeSpecification, pageable).map(productMapper::map);
     }
 

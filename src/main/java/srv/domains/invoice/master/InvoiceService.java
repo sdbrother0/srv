@@ -1,6 +1,5 @@
 package srv.domains.invoice.master;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -30,7 +29,6 @@ import static srv.service.MapperService.invoiceMapper;
 @Log4j2
 public class InvoiceService {
 
-    private final ObjectMapper objectMapper;
     private final InvoiceRepository invoiceRepository;
     private final DataSource dataSource;
     private final ReportService reportService;
