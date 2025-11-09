@@ -21,6 +21,9 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Run tests
+        run: ./gradlew clean test --no-daemon
+
       - name: Build JAR
         run: ./gradlew clean bootJar --no-daemon
 
