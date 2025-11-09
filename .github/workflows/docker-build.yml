@@ -57,6 +57,9 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          build-args: |
+            BUILDKIT_INLINE_CACHE=0
+          no-cache: true
 
       - name: Print image info
         run: |
