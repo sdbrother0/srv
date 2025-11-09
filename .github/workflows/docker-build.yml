@@ -38,3 +38,5 @@ jobs:
           tags: |
             ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          context: .
+          file: Dockerfile
