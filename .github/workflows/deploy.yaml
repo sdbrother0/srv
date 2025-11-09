@@ -21,7 +21,16 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "${{ secrets.SERVER_GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker pull ghcr.io/${{ github.actor }}/srv:latest
-            docker stop srv-container || true
-            docker rm srv-container || true
-            docker run -d --name srv-container -p 8080:8080 ghcr.io/${{ github.actor }}/srv:latest
+
+            echo "Pulling latest image..."
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+            echo "Stopping old container if exists..."
+            docker stop ${{ env.CONTAINER_NAME }} || true
+            docker rm ${{ env.CONTAINER_NAME }} || true
+
+            echo "Starting new container..."
+            docker run -d \
+              --name ${{ env.CONTAINER_NAME }} \
+              -p 8080:8080 \
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
