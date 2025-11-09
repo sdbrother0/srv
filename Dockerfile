@@ -2,6 +2,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # 👇 the JAR is built in build/libs/
+ls build/libs
 ARG JAR_FILE=build/libs/srv-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 
