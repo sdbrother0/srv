@@ -57,9 +57,6 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-          build-args: |
-            CACHEBUST=${{ github.run_id }}
-          no-cache: true
 
       - name: Print image info
         run: |
