@@ -31,6 +31,7 @@ jobs:
 
             echo "Starting new container..."
             docker run -d \
+              -e JAVA_OPTS='-Xmx256m' \
               --name ${{ env.CONTAINER_NAME }} \
               -p 8090:8090 \
               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
