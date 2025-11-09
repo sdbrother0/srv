@@ -1,4 +1,4 @@
-name: Build & Push Spring Boot Docker Image
+name: Build, Test & Push
 
 on:
   push:
