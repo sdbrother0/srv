@@ -48,34 +48,4 @@ public class ExampleService {
         ExampleEntity savedExampleEntity = exampleRepository.save(exampleEntity);
         return exampleMapper.map(savedExampleEntity);
     }
-
-    public MetaData getMetaData() throws JsonProcessingException {
-        String meta = """
-                {
-                    "url" : "/example",
-                    "name": "example",
-                    "key": "id",
-                    "fields": [
-                        {
-                            "name": "id",
-                            "label": "Id",
-                            "type": {
-                                "name": "string"
-                            },
-                            "hidden": false
-                        },
-                        {
-                            "name": "name",
-                            "label": "Example name",
-                            "type": {
-                                "name": "string"
-                            },
-                            "editable": true
-                        }
-                    ]
-                }
-            """;
-        return objectMapper.readValue(meta, MetaData.class);
-    }
-
 }

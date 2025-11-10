@@ -1,0 +1,23 @@
+{
+  "url" : "/example",
+  "name": "example",
+  "key": "id",
+  "fields": [
+    {
+      "name": "id",
+      "label": "Id",
+      "type": {
+        "name": "string"
+      },
+      "hidden": false
+    },
+    {
+      "name": "name",
+      "label": "Example name",
+      "type": {
+        "name": "string"
+      },
+      "editable": true
+    }
+  ]
+}

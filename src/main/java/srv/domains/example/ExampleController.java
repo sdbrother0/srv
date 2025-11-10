@@ -22,11 +22,6 @@ public class ExampleController {
     private final ExampleService exampleService;
     private static final String DATA_URL = "/example";
 
-    @GetMapping("/meta" + DATA_URL)
-    public MetaData getMetaData() throws JsonProcessingException {
-        return exampleService.getMetaData();
-    }
-
     @GetMapping(DATA_URL)
     public Page<ExampleDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         return exampleService.findAll(pageable, search);
