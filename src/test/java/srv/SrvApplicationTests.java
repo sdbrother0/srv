@@ -27,12 +27,15 @@ class SrvApplicationTests {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].title").value("Invoice example"))
             .andExpect(jsonPath("$[0].routes").isArray())
+
             .andExpect(jsonPath("$[0].routes[0].path").value("product"))
             .andExpect(jsonPath("$[0].routes[0].metaUrl").value("/meta/product"))
             .andExpect(jsonPath("$[0].routes[0].title").value("Product"))
+
             .andExpect(jsonPath("$[0].routes[1].path").value("customer"))
             .andExpect(jsonPath("$[0].routes[1].metaUrl").value("/meta/customer"))
             .andExpect(jsonPath("$[0].routes[1].title").value("Customer"))
+
             .andExpect(jsonPath("$[0].routes[2].path").value("invoice"))
             .andExpect(jsonPath("$[0].routes[2].metaUrl").value("/meta/invoice"))
             .andExpect(jsonPath("$[0].routes[2].title").value("Invoice"));
