@@ -14,10 +14,9 @@ import java.util.List;
 @Log4j2
 public class MenuController {
 
-    private static final String DATA_URL = "/menu";
     private final MenuService menuService;
 
-    @GetMapping("/meta" + DATA_URL)
+    @GetMapping("/menu")
     public List<Menu> getRoutes() {
         log.info("get routes");
         return menuService.getMenu();

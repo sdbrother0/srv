@@ -1,6 +1,5 @@
 package srv.domains.invoice.master;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import srv.dto.meta.MetaData;
 
 import java.util.List;
 
@@ -24,11 +22,6 @@ public class InvoiceController {
 
     private final InvoiceService invoiceService;
     private static final String DATA_URL = "/invoice";
-
-    @GetMapping("/meta" + DATA_URL)
-    public MetaData getMetaData() throws JsonProcessingException {
-        return invoiceService.getMetaData();
-    }
 
     @GetMapping(DATA_URL)
     public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {

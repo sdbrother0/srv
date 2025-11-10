@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class SimpleLikeSpecification<T> implements Specification<T> {

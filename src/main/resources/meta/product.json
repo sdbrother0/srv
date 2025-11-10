@@ -1,0 +1,31 @@
+{
+  "url": "/product",
+  "name": "product",
+  "key": "id",
+  "fields": [
+    {
+      "name": "id",
+      "label": "Id",
+      "type": {
+        "name": "string"
+      },
+      "hidden": false
+    },
+    {
+      "name": "name",
+      "label": "Product name",
+      "type": {
+        "name": "string"
+      },
+      "editable": true
+    },
+    {
+      "name": "price",
+      "label": "Product price",
+      "type": {
+        "name": "number"
+      },
+      "editable": true
+    }
+  ]
+}

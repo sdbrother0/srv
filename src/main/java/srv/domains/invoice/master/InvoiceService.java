@@ -1,7 +1,5 @@
 package srv.domains.invoice.master;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import srv.dto.meta.MetaData;
 import srv.specification.SimpleLikeSpecification;
 
 import javax.sql.DataSource;
@@ -32,7 +29,6 @@ import static srv.service.MapperService.invoiceMapper;
 @Log4j2
 public class InvoiceService {
 
-    private final ObjectMapper objectMapper;
     private final InvoiceRepository invoiceRepository;
     private final DataSource dataSource;
     private final ReportService reportService;
@@ -69,84 +65,6 @@ public class InvoiceService {
             log.error("Error report", e);
         }
         return new byte[0];
-    }
-
-    public MetaData getMetaData() throws JsonProcessingException {
-        String meta = """
-                {
-                    "url" : "/invoice",
-                    "name": "invoice",
-                    "key": "id",
-                    "fields": [
-                        {
-                            "name": "id",
-                            "label": "Id",
-                            "type": {
-                                "name": "string"
-                            },
-                            "hidden": false
-                        },
-                        {
-                            "name": "created",
-                            "label": "Date time",
-                            "type": {
-                                "name": "date",
-                                "format": "yyyy-MM-dd HH:mm:ss"
-                            },
-                            "editable": true,
-                            "validation": {
-                                "required": true,
-                                "message": "Input date please!!!"
-                            }
-                        },
-                        {
-                            "name": "customer",
-                            "label": "Customer",
-                            "type": {
-                                "name": "lookup",
-                                "metaUrl": "/meta/customer",
-                                "foreignKey": "customer_id",
-                                "keyFieldName": "id",
-                                "valFieldName": "name"
-                            },
-                            "validation": {
-                                "required": true,
-                                "message": "Select customer please!!!"
-                            },
-                            "editable": true
-                        },
-                        {
-                            "name": "total",
-                            "label": "Total",
-                            "type": {
-                                "name": "number"
-                            },
-                            "editable": false
-                        },
-                        {
-                            "name": "taxTotal",
-                            "label": "Tax total",
-                            "type": {
-                                "name": "number"
-                            },
-                            "editable": false
-                        }
-                    ],
-                    "details": [
-                          {
-                            "label": "Invoice details",
-                            "metaUrl" : "/meta/invoice_product_details"
-                          }
-                    ],
-                    "reports": [
-                        {
-                            "label": "Invoice pdf",
-                            "url": "/reports/invoice"
-                        }
-                    ]
-                }
-            """;
-        return objectMapper.readValue(meta, MetaData.class);
     }
 
 }
