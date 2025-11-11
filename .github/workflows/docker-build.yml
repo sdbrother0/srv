@@ -16,7 +16,10 @@ jobs:
 
     steps:
       - name: Set BRANCH_NAME
-        run: echo "BRANCH_NAME=${GITHUB_REF_NAME//\//-}" >> $GITHUB_ENV
+        run: |
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          BRANCH_NAME="${BRANCH_NAME//\//-}"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
