@@ -42,7 +42,7 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/${{ github.actor }}/srv:latest
+            ghcr.io/${{ github.actor }}/srv:${{ github.ref_name }}
             ghcr.io/${{ github.actor }}/srv:${{ github.sha }}
           context: .
           file: Dockerfile
