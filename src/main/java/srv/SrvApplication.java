@@ -13,6 +13,7 @@ import static org.springframework.data.web.config.EnableSpringDataWebSupport.Pag
 public class SrvApplication {
     public static void main(String[] args) {
         SpringApplication.run(SrvApplication.class, args);
+        //
     }
 
 }
