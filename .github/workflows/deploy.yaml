@@ -13,6 +13,9 @@ jobs:
       CONTAINER_NAME: srv-container
 
     steps:
+      - name: Set BRANCH_NAME
+        run: echo "BRANCH_NAME=${GITHUB_REF_NAME//\//-}" >> $GITHUB_ENV
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.1.0
         with:
@@ -21,9 +24,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-  
-            echo "Pulling latest image..."
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            
+            echo "Pulling image..."
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }}
 
             echo "Stopping old container if exists..."
             docker stop ${{ env.CONTAINER_NAME }} || true
@@ -34,4 +37,4 @@ jobs:
               -e JAVA_OPTS='-Xmx256m' \
               --name ${{ env.CONTAINER_NAME }} \
               -p 8090:8090 \
-              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }}
