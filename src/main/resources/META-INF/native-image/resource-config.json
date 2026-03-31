@@ -1,0 +1,21 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "menu/index.json"
+      },
+      {
+        "pattern": "meta/customer.json"
+      },
+      {
+        "pattern": "meta/invoice.json"
+      },
+      {
+        "pattern": "meta/invoice_product_details.json"
+      },
+      {
+        "pattern": "meta/product.json"
+      }
+    ]
+  }
+}
