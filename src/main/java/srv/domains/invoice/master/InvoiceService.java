@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static srv.service.MapperService.invoiceMapper;
-
 @RequiredArgsConstructor
 @Service
 @Log4j2
@@ -32,6 +30,7 @@ public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final DataSource dataSource;
     private final ReportService reportService;
+    private final InvoiceMapper invoiceMapper;
 
     public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(search)) {

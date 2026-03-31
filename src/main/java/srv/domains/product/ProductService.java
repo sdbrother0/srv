@@ -15,12 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static srv.service.MapperService.productMapper;
-
 @RequiredArgsConstructor
 @Service
 public class ProductService {
 
+    private final ProductMapper productMapper;
     private final ProductRepository productRepository;
 
     public Page<ProductDto> findAll(Pageable pageable,

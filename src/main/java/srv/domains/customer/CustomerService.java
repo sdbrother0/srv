@@ -16,14 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static srv.service.MapperService.customerMapper;
-
 @RequiredArgsConstructor
 @Service
 public class CustomerService {
 
     private final CustomerRepository productRepository;
     private final EntityManager entityManager;
+    private final CustomerMapper customerMapper;
 
     public Page<CustomerDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search, String keyValue) {
         if (Objects.isNull(search)) {

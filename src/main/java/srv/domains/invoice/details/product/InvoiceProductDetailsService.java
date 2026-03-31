@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import srv.domains.invoice.master.InvoiceEntity;
+import srv.domains.invoice.master.InvoiceMapper;
 import srv.domains.invoice.master.InvoiceRepository;
 import srv.specification.SimpleLikeSpecification;
 
@@ -21,9 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static srv.service.MapperService.invoiceMapper;
-import static srv.service.MapperService.invoiceProductDetailsMapper;
-
 @RequiredArgsConstructor
 @Service
 public class InvoiceProductDetailsService {
@@ -31,6 +29,8 @@ public class InvoiceProductDetailsService {
     private final InvoiceProductDetailsRepository invoiceProductDetailsRepository;
     private final InvoiceRepository invoiceRepository;
     private final EntityManager entityManager;
+    private final InvoiceProductDetailsMapper invoiceProductDetailsMapper;
+    private final InvoiceMapper invoiceMapper;
 
     public Page<InvoiceProductDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
         if (Objects.isNull(masterId)) {
