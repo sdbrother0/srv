@@ -1,6 +1,6 @@
 # Getting Started
 
-### 1. Install Java 21 (for example on Debian Linux):
+### 1. Install Java 25 (for example on Debian Linux):
 ```
 wget https://download.oracle.com/java/25/latest/jdk-25_linux-x64_bin.deb
 sudo dpkg -i jdk-25_linux-x64_bin.deb
