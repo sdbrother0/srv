@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import srv.specification.SimpleLikeSpecification;
 
 import javax.sql.DataSource;
@@ -32,7 +30,7 @@ public class InvoiceService {
     private final ReportService reportService;
     private final InvoiceMapper invoiceMapper;
 
-    public Page<InvoiceDto> findAll(Pageable pageable, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceDto> findAll(Pageable pageable, List<String> search) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
@@ -41,14 +39,14 @@ public class InvoiceService {
     }
 
     @Transactional
-    public InvoiceDto delete(@RequestParam Long id) {
+    public InvoiceDto delete(Long id) {
         InvoiceEntity invoiceEntity = invoiceRepository.findById(id).orElseThrow();
         invoiceRepository.deleteById(id);
         return invoiceMapper.map(invoiceEntity);
     }
 
     @Transactional
-    public InvoiceDto save(@RequestBody InvoiceDto invoiceDto) {
+    public InvoiceDto save(InvoiceDto invoiceDto) {
         InvoiceEntity invoiceEntity = invoiceMapper.map(invoiceDto);
         InvoiceEntity savedInvoiceEntity = invoiceRepository.save(invoiceEntity);
         return invoiceMapper.map(savedInvoiceEntity);

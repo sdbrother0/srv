@@ -7,8 +7,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import srv.specification.SimpleLikeSpecification;
 
 import java.util.ArrayList;
@@ -23,8 +21,8 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public Page<ProductDto> findAll(Pageable pageable,
-                                    @RequestParam(name = "search", required = false) List<String> search,
-                                    @RequestParam(name = "keyValue", required = false) String keyValue) {
+                                    List<String> search,
+                                    String keyValue) {
         if (Objects.isNull(search)) {
             search = new ArrayList<>();
         }
@@ -33,14 +31,14 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDto delete(@RequestParam Long id) {
+    public ProductDto delete(Long id) {
         ProductEntity productEntity = productRepository.findById(id).orElseThrow();
         productRepository.deleteById(id);
         return productMapper.map(productEntity);
     }
 
     @Transactional
-    public ProductDto save(@RequestBody ProductDto productDto) {
+    public ProductDto save(ProductDto productDto) {
         ProductEntity productEntity = productMapper.map(productDto);
         ProductEntity savedProductEntity = productRepository.save(productEntity);
         return productMapper.map(savedProductEntity);

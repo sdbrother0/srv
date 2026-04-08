@@ -8,8 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import srv.domains.invoice.master.InvoiceEntity;
 import srv.domains.invoice.master.InvoiceMapper;
 import srv.domains.invoice.master.InvoiceRepository;
@@ -32,7 +30,7 @@ public class InvoiceProductDetailsService {
     private final InvoiceProductDetailsMapper invoiceProductDetailsMapper;
     private final InvoiceMapper invoiceMapper;
 
-    public Page<InvoiceProductDetailsDto> findAll(Pageable pageable, @RequestParam(value = "masterId", required = false) Long masterId, @RequestParam(name = "search", required = false) List<String> search) {
+    public Page<InvoiceProductDetailsDto> findAll(Pageable pageable, Long masterId, List<String> search) {
         if (Objects.isNull(masterId)) {
             return new PageImpl<>(Collections.emptyList());
         }
@@ -44,7 +42,7 @@ public class InvoiceProductDetailsService {
     }
 
     @Transactional
-    public InvoiceProductDetailsDto delete(@RequestParam Long id) {
+    public InvoiceProductDetailsDto delete(Long id) {
         InvoiceProductDetailsEntity invoiceProductDetailsEntity = invoiceProductDetailsRepository.findById(id).orElseThrow();
         invoiceProductDetailsRepository.deleteById(id);
         InvoiceEntity invoiceEntity = invoiceRepository.findById(invoiceProductDetailsEntity.getInvoice().getId()).orElseThrow();
@@ -54,7 +52,7 @@ public class InvoiceProductDetailsService {
     }
 
     @Transactional
-    public InvoiceProductDetailsDto save(@RequestBody InvoiceProductDetailsDto invoiceDetailsDto) {
+    public InvoiceProductDetailsDto save(InvoiceProductDetailsDto invoiceDetailsDto) {
         InvoiceEntity invoiceEntity = invoiceMapper.map(invoiceDetailsDto.getInvoice());
         invoiceEntity = invoiceRepository.save(invoiceEntity);
 
