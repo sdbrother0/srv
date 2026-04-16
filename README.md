@@ -1,7 +1,15 @@
 # Getting Started
 
-### 1. Install Java 25 (for example on Debian Linux):
-```
+This guide explains how to set up and run the backend service for the Metadata-Driven Web UI for Business Data Management
+
+Backend repository:
+https://github.com/sdbrother0/srv
+
+---
+
+## 1. Install Java 25 (Debian Linux example)
+
+```bash
 wget https://download.oracle.com/java/25/latest/jdk-25_linux-x64_bin.deb
 sudo dpkg -i jdk-25_linux-x64_bin.deb
 ```
