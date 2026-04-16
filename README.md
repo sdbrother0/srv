@@ -2,8 +2,7 @@
 
 This guide explains how to set up and run the backend service for the Metadata-Driven Web UI for Business Data Management
 
-Backend repository:
-https://github.com/sdbrother0/srv
+Frontend: 👉 https://github.com/sdbrother0/ui-ng-ant
 
 ---
 
