@@ -38,7 +38,13 @@ public class SimpleLikeSpecification<T> implements Specification<T> {
                     String field = fieldValue[0];
                     String value = fieldValue[1];
                     Path<T> fieldPath = toPatch(field, root);
-                    Predicate predicate = criteriaBuilder.like(criteriaBuilder.upper(fieldPath.as(String.class)), "%" + value.toUpperCase() + "%");
+                    Predicate predicate;
+                    if (String.class.equals(fieldPath.getJavaType())) {
+                        predicate = criteriaBuilder.like(criteriaBuilder.upper(fieldPath.as(String.class)), "%" + value.toUpperCase() + "%");
+                    } else {
+                        // non-text fields (numeric ids, foreign keys, ...) are matched exactly
+                        predicate = criteriaBuilder.equal(fieldPath.as(String.class), value);
+                    }
                     predicateList.add(predicate);
                 }
             }

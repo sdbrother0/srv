@@ -22,4 +22,5 @@ public class MetaData implements Serializable {
     private List<Field> fields;
     private List<Detail> details;
     private List<Report> reports;
+    private Tree tree;
 }

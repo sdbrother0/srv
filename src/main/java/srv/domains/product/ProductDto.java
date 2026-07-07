@@ -9,6 +9,7 @@ public class ProductDto {
     private Long id;
     private String name;
     private BigDecimal price;
+    private Long category;
     private BigDecimal taxedPrice;
     private BigDecimal tax;
 }

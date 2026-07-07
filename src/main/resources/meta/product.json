@@ -26,6 +26,22 @@
         "name": "number"
       },
       "editable": true
+    },
+    {
+      "name": "category",
+      "label": "Category",
+      "type": {
+        "name": "number"
+      },
+      "editable": true
     }
-  ]
+  ],
+  "tree": {
+    "url": "/api/category/tree",
+    "keyFieldName": "id",
+    "titleFieldName": "name",
+    "parentFieldName": "parentId",
+    "fkFieldName": "category"
+  }
+
 }

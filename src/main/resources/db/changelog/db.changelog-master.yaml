@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/init/add-users.sql
   - include:
       file: db/changelog/init/examples.sql
+  - include:
+      file: db/changelog/init/add-category.sql

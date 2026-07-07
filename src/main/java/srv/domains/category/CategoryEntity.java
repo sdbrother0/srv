@@ -1,4 +1,4 @@
-package srv.domains.product;
+package srv.domains.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,15 +8,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Formula;
-
-import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
-public class ProductEntity {
+@Table(name = "category")
+public class CategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +22,7 @@ public class ProductEntity {
     @Column
     private String name;
 
-    @Column
-    private BigDecimal price;
-
-    @Column
-    private Long category;
-
-    @Formula("price + price * 0.2")
-    private BigDecimal taxedPrice;
-
-    @Formula("price * 0.2")
-    private BigDecimal tax;
+    @Column(name = "parent_id")
+    private Long parentId;
 
 }
